@@ -12,7 +12,7 @@ Todasas cartas presentes em data/cardList.ts (Cartas Originais de Fliptoons) dev
 
 ### Baralho Inicial
 - Lagarta = Caterpie
-- Gambá = Eevee
+- Gambá = Pikachu
 - Mosquito = Rattata
 - Lesma = Bulbasaur
 - Abelha = Jigglypuff
@@ -29,6 +29,10 @@ Todasas cartas presentes em data/cardList.ts (Cartas Originais de Fliptoons) dev
 - Hitmonlee = Starfish
 - Hitmonchan = Swordfish
 
+## Cartas Promos
+- Nidoking = Axolotl
+- Nidoqueen = Platypus
+
 ### Associações óbvias
 - Vaca = Ditto (pois copia valores)
 - Borboleta = Butterfree (pois está associada a Caterpie/Lagarta)
@@ -44,6 +48,9 @@ O desafio de encaixe é o seguinte. Econtrar em cada uma das cartas que não est
 - Média de communityTierlist deve ser o mais próxima possível de personalTierlistRank. Ao mesmo tempo, sempre que possível, altos baseRank devem estar o mais próximo possível de altos personalTierlistRank (Ex: Sloth = Mewtwo)
 - Cartas de de personalTierlistRank "SS" preferencialmente devem evitar ser associadas com cardCount maior que 1 (sempre que possível)
 - Importante que sempre possível o texto da carta deve ter alguma relação com as características/personalidade do Pokémon (exmeplo: Vaca = Tauros - pelo poder de copia). Ou também quando há associações de menções na carta (ex: Lagarta = Caterpie junto com Borboleta = Butterfree)
+- IMPORTANTE: em hipótese nenhuma a aparência do animal de fliptoons deve ser levada em consideração para associar a um pokémon. Ex: Gyarados 130 (A) | serpente  ou Leão (16, A A A) | Arcanine 59 (A) | felino/canino imponente 
+
+- Incialmente temos como base /home/galv/.claude/plans/primeiro-crie-um-repo-squishy-leaf.md. Porém aqui temos muitas associações a aparencia. Deve ser algo mais assoaicado a características. Ex: Vaca = Ditto (efeito de copiar),  e etc. E outra coisa importante; isso deve ser usado com parcimônia. Penso que mais importante que  isso são os 2 primeiros critérios mencionados.
 
 ## Alteração em dados de cardList.ts
 

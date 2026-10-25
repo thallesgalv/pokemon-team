@@ -2,6 +2,9 @@ import { cardList } from "../data/cardList";
 import { backgroundColors, fallbackColor } from "./backgrounds";
 import { pokemonInfo } from "./pokemonInfo";
 
+const spriteUrl = (id: number) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/lets-go-pikachu-lets-go-eevee/${id}.gif`;
+
 export default function App() {
   return (
     <main className="grid">
@@ -17,6 +20,13 @@ export default function App() {
             <h2 className="card-name">
               {card.name} <small>({card.originalName})</small>
             </h2>
+            <img className="card-img" src={spriteUrl(card.id)} alt={card.name} loading="lazy" />
+            <p className="card-points">
+              <strong>Base: {card.basePoint}</strong>
+              {card.extraPoints !== 0 && <strong>Extra: +{card.extraPoints}</strong>}
+            </p>
+            {card.originalText && <p className="card-text">{card.originalText}</p>}
+            {card.originalPassive && <p className="card-text">{card.originalPassive}</p>}
             <footer className="card-bottom">
               <span>Community: {card.communityRank.join(" / ")}</span>
               <span>Pessoal: {info?.personalTierlistRank ?? "-"}</span>
