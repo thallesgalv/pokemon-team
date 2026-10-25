@@ -1,0 +1,8 @@
+originalKeyword,originalKeywordEffect,keyword,keywordEffect
+Adjacente,"Toons vizinhos uns aos outros, na grade de um jogador, que compartilhem uma lateral (esquerda, direita, cima ou baixo), são considerados adjacentes. Diagonais não são consideradas adjacências.",,
+Dispense,"Remova um Toon de sua grade e coloque-o virado para cima em sua área de Toons Dispensados. Qualquer jogador pode olhar as cartas Toon Dispensadas de qualquer jogador, à qualquer momento.",,
+Vire,Vire um Toon em sua grade. Um Toon virado para baixo não gera fama. Um Toon virado para baixo pode ser virado para cima novamente em função da habilidade de uma outra carta.,,
+Empilhe,"Coloque um Toon sobre outro Toon da Grade, mantendo os efeitos especiais e as habilidades de todos os Toons empilhados visíveis. 
+Toons empilhados compartilham o mesmo espaço na grade de um jogador e os efeitos especiais e habilidades de todos os Toons virados para cima naquela pilha estão ativos. ",,
+Adjacência de pilhas,Cartas em uma pilha não são consideradas adjacentes umas às outras. Todas as cartas em uma pilha são consideradas adjacentes aos espaços ortogonalmente adjacentes ao espaço da pilha na grade do jogador.,,
+Return,"Place a card face down on the bottom of a player’s deck. If a player’s deck has no cards when a card is returned, the returned card becomes the player’s deck and they continue their Flip phase if any empty slots remain in their grid.",,

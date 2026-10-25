@@ -1,0 +1,63 @@
+originalName,pool,baseRank,cardCount,basePoint,extraPoints,originalText,originalPassive,communityTierlist
+Lagarta,1,0,2,0,0,"""""",Custa 3 para dispensar em vez de 5.,UNRANKED
+Abelha,1,0,1,1,0,"""""","""""",UNRANKED
+Lesma,1,0,1,2,0,"""""","""""",UNRANKED
+Libélula,1,0,1,0,1,POR Toon adjascente diferente.,"""""",UNRANKED
+Gambá,1,0,1,0,0,"SE você possuir a menor fama depois da fase ""Checar Fama"" dispense um Toon dessa grade por 0.","""""",UNRANKED
+Avestruz,1,1,3,1,0,Empilhe o próximo Toon revelado sobre este Toon.,"""""","D, C, S"
+Águia,1,2,2,4,0,"Vire o próximo Toon revelado, exceto se possuir não vire (Toons virados não ativam).",Não pode ser virado.,"G, D, D"
+Burro,1,3,2,1,5,"SE estiver na linha inferior, então, dispense este Toon depois da Fase de Mercado.","""""","D, C, C"
+Borboleta,1,4,3,2,0,"""""","Quando contratada, pode dispensar uma LAGARTA.","F, D, C"
+Cachorro,1,5,4,0,5,SE houver ao menos um outro CACHORRO em qualquer grade ou no Mercado.,"""""","G, E, D"
+Cabra,1,6,2,1,3,SE estiver na linha superior.,"""""","G, D, C"
+Ovelha,1,7,2,1,4,SE estiver na coluna do meio.,"""""","G, D, C"
+Camelo,1,8,5,2,2,SE nenhuma outra grade ou o Mercado tiver mais CAMELOS que você.,"""""","C, B, C"
+Coelho,1,9,4,3,0,"Empilhe este Toon sobre outro COELHO ou carta virada para baixo em sua grade, se possível.",Não pode ser virado.,"B, A, S"
+Cavalo,1,10,2,4,0,"""""","Quando contratado, descarte qualquer número de cartas do mercado e reponha.","B, B, B"
+Cobra,1,11,2,1,0,Dispense a carta do topo seu baralho e empilhe a carta do topo do baralho de Toons sobre este Toon.,"""""","A, A, B"
+Elefante,1,12,2,7,0,Vire o Toon revelado antes deste (exceto se possuir não pode ser virado).,Não pode ser virado.,"E, C, D"
+Galo,1,13,2,0,1,POR Toon com Rank menor ou igual a 13 (incluindo este Toon).,"""""","C, B, B"
+Gato,1,14,2,1,1,POR TOON INICIAL entre os Toons que você dispensou.,Não pode ser dispensado.,"S, S, SS"
+Jacaré,1,15,2,6,0,"Depois da fase de Mercado, dispense um Toon adjacente à direita deste.","""""","B, B, A"
+Leão,1,16,2,3,4,SE todos os Toons adjacentes possuirem Rank 16 ou menor.,"""""","A, A, A"
+Macaco,1,17,2,3,0,"Se revelado na linha superior, mova esta carta para uma linha acima.","""""","C, D, S"
+Porco,1,18,1,-1,0,"""""","Quando contratado ou dispensado, coloque este Toon no baralho de outro jogador.",UNRANKED
+Pavão,1,19,2,5,0,"""""","Quando contratado, ganhe 2 e faça uma ação extra de mercado.","A, B, A"
+Peru,1,20,2,5,0,Empilhe este Toon sobre o Toon anterior.,"""""","S, S, S"
+Touro,1,21,1,3,7,SE uma ou mais cardas em sua grade estiver virada.,Não pode ser virado.,"E, D, D"
+Tigre,1,22,1,3,1,POR Toon dispensado por você.,Não pode ser dispensado.,"SS, SS, SS"
+Veado,1,23,1,3,5,SE cada Toon virado para cima na sua grade for único.,"""""","A, C, S"
+Urso,1,24,1,1,1,POR Toon virado para cima em sua grade.,"""""","S, S, S"
+Vaca,1,25,1,"""=""",0,Copie a fama de um Toon adjascente,"""""","C, C, B"
+Mosquito,2,0,2,0,0,"""""","""""",UNRANKED
+Ladybug,2,0,1,1,0,"""""",Adjacent cards cost 3 instead of 5 to dismiss,UNRANKED
+Spider,2,0,1,1,1,PER card bellow this card.,"""""",UNRANKED
+Grasshopper,2,0,1,1,1,PER card above this card.,"""""",UNRANKED
+Firefly,2,0,1,1,1,"IF you have the least fame after the Check Fame phase, gain 2.","""""",UNRANKED
+Salamander,2,1,3,3,0,"IF the next revelead card is rank 1 or lower, return it.","""""","D, C"
+Groundhog,2,2,3,3,0,"After Market phase, dismiss this card if first or last in your grid.","""""","D, C"
+Rat,2,3,4,1,0,Stack this card on the previous placed card.,Cards in Rat's stack cost 1 fewer to dismiss.,"D, C"
+Goldfish,2,4,5,1,1,PER fish card (including this card).,Cannot be flipped / Fish.,"E, B"
+Mole,2,5,2,3,0,"IF placed in the lower row, stack this card on the card above.","""""","C, C"
+Hen,2,6,3,0,1,PER card rank 6 or higher (including this card).,"""""","S, S"
+Starfish,2,7,2,4,0,Flip the previous placed card unless (not flip symbol) and stack this card on it.,Cannot be flipped / Fish.,"F, D"
+Raccoon,2,8,2,3,0,"""""","When hired, you may hire any dismissed card for 0.","C, C"
+Panther,2,9,2,2,0,Stack this card on the previous placed card.,"When hired, dismiss a face-up card in your grid for 0.","B, A"
+Opossum,2,10,2,2,2,PER pair of identical cards in your dismissed cards.,Cannot be dismissed,"C, C"
+Mongoose,2,11,2,2,0,Dismiss the bottom card of your deck unless it (not dismiss symbol) and add the top card of the Toon Deck to the top of your deck.,"""""","A, B"
+Capybara,2,12,2,2,4,IF there are at least three cards remaining in your deck.,"""""","F, E"
+Crow,2,13,2,2,0,"""""","When dismissed, you may hire a card in the Market for 0 and refill.","B, B"
+Coyote,2,14,2,5,0,Return the previous placed card unless it (not return symbol) and place this card in its space.,Cannot be returned.,"A, S"
+Clowfish,2,15,2,3,2,IF adjacent to at least one fish card.,Cannot be flipped / Fish.,"E, D"
+Fox,2,16,2,3,3,IF there is at least one HEN or ROOSTER in the market or any other player's grid.,,"B, C"
+Crab,2,17,2,5,0,"IF placed in the middle column, return this card.","""""","B, A"
+Swordfish,2,18,2,8,0,Flip the previous placed card unless (not flip symbol) and flip the next card unless it (not flip symbol),Cannot be flipped / Fish.,"G, E"
+Gorilla,2,19,2,5,0,"IF placed in the upper row, place the next revelead card in a row above.","""""","A, S"
+Vulture,2,20,1,6,0,"After the Market phase, dismiss the lowest rank card in your grid unless it (not dismiss symbol)","""""","A, S"
+Zebra,2,21,2,5,0,Return the lowest rank card in your grid and place this card in its place.,Cannot be returned.,"A, S"
+Shark,2,22,1,3,1,PER fish card.,Cannot be flipped.,"E, D"
+Rhinoceros,2,23,1,1,3,PER adjacent odd rank,"""""","C, B"
+Hippotamus,2,24,1,0,2,PER card remaining in your deck.,"""""","F, E"
+Sloth,2,25,1,3,5,Stack on the previous placed card. IF your grid has at least eight cards.,"""""","SS, SS"
+Axolotl,1PROM,26,2,7,0,"""""","When hired, flip your big button card face-up.",UNRANKED
+Platypus,2PROM,26,2,5,3,IF your big button card is face down.,"When hired, flip all big button cards face-up.",UNRANKED

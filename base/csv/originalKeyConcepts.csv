@@ -1,0 +1,20 @@
+originalKeyConcept,originalKeyConceptEffect
+Ability/Special Effect Timing,"If a card’s ability affects the next revealed card, resolve its ability fully before the newly revealed card’s ability. If two or more abilities activate in the same stack, resolve them starting with the topmost card. 
+If two or more abilities activate outside a player’s grid, that player resolves them in the order of their choice. 
+If any “When Hired” or “When Dismissed” abilities are activated during the Flip phase, resolve them at the end of the Flip phase in clockwise order starting with the player with the first player card."
+Dismissed Cards,A player may examine any player’s dismissed cards at any time. 
+Face-down Cards,"A face-down card has no name, rank, special effects, or abilities and does not generate fame, but isstill a card and still takes a slot in a player’s grid. 
+A face-down card may be flipped face up again by another card’s ability, but does not activate any of its abilities.
+"
+Fish Cards,"A fish card has a fish ( ) icon on the right side of the special effect banner. The goldfish, starfish, clownfish, and swordfish are considered fish cards. The shark is not considered a fish card."
+Lowest Rank Card,"If there is more than one card with the lowest rank, the card with lowest rank is the leftmost card in the topmost row of the grid. If there is still a tie between stacked
+cards, the lowest rank is the topmost of the tied cards in the stack. A face-down card has no rank and will never be the lowest rank card in a grid."
+Next Revealed Card,"If a card placed in the last slot of a player’s grid refers to the next revealed card, ignore that part of its ability. A card’s ability applies only once, even if the next revealed card moves or is returned after being placed. 
+Fully resolve the ability affecting the next revealed card before any abilities on that card. 
+If the next revealed card is flipped or returned, do not resolve any of its abilities."
+Player Deck,A player may examine their own deck during the Market phase. A player may count the cards in any player’s deck at any time. 
+Previous Placed Card,"If a card placed in the first slot of a player’s grid refers to a previous placed card, ignore that part of its ability. 
+When a card refers to a previous placed card, it affects the card last added to the grid, even if that card has moved to a new position. 
+If the previous placed card was returned, the ability affects the card last added to the grid instead."
+Stack Adjacency,Cards within a stack are not adjacent to one another. All cards in a stack are considered adjacent to cards in neighboring spaces in a player’s grid.
+Stacked Cards,"Stacked cards share a slot in a player’s grid. The name, fame, rank, special effects, and abilities of all faceup cards in a stack are active."
