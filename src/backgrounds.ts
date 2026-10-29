@@ -24,3 +24,16 @@ export const backgroundColors: Record<string, string> = {
 };
 
 export const fallbackColor = "#dddddd";
+
+// Imagens de assets/bg/<BACKGROUND>.png; quem não tem imagem usa a cor acima
+const backgroundImages: Record<string, string> = Object.fromEntries(
+  Object.entries(
+    import.meta.glob<string>("../assets/bg/*.png", { eager: true, import: "default" }),
+  ).map(([path, url]) => [path.split("/").pop()!.replace(".png", ""), url]),
+);
+
+export const cardBackground = (background?: string) => {
+  const image = background && backgroundImages[background];
+  if (image) return `center / cover no-repeat url(${image})`;
+  return (background && backgroundColors[background]) ?? fallbackColor;
+};

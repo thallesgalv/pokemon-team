@@ -1,5 +1,5 @@
 import { cardList } from "../data/cardList";
-import { backgroundColors, fallbackColor } from "./backgrounds";
+import { cardBackground } from "./backgrounds";
 import { pokemonInfo } from "./pokemonInfo";
 
 const spriteUrl = (id: number) =>
@@ -10,7 +10,7 @@ export default function App() {
     <main className="grid">
       {cardList.map((card) => {
         const info = pokemonInfo.get(card.id);
-        const bg = (info && backgroundColors[info.background]) ?? fallbackColor;
+        const bg = cardBackground(info?.background);
         return (
           <article key={card.id} className="card" style={{ background: bg }}>
             <header className="card-top">
