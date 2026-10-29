@@ -1,6 +1,6 @@
 // Gera um PNG por carta em output/cards a partir da rota /render/<id>.
 // Uso: npm run cards [-- --id 1,25] [--skip-build] [--public]
-import { copyFileSync, mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { build, preview } from "astro";
 import { chromium } from "playwright";
@@ -20,7 +20,14 @@ const { values } = parseArgs({
   },
 });
 
-type CardEntry = { id: number; name: string; fileName: string };
+type CardEntry = { id: number; name: string; fileName: string; cardCount: number };
+
+// Nome de arquivo por cópia impressa, ex.: SNORLAX_2_DE_4.png
+const printFileName = (name: string, index: number, count: number) =>
+  `${name
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toUpperCase()}_${index}_DE_${count}.png`;
 
 if (!values["skip-build"]) await build({});
 const server = await preview({ server: { port: PORT }, logLevel: "warn" });
@@ -39,6 +46,7 @@ const viewport = { width: size.width + 1, height: size.height + 1 };
 const browser = await chromium.launch();
 const failures: string[] = [];
 let total = 0;
+let failedCopies = 0;
 
 try {
   const cardList: CardEntry[] = await (await fetch(`${BASE_URL}/render/cards.json`)).json();
@@ -51,23 +59,27 @@ try {
     viewport,
   });
 
-  total = cards.length;
   for (const card of cards) {
-    const name = card.fileName;
+    total += card.cardCount;
     try {
       await page.goto(`${BASE_URL}/render/${card.id}`, { waitUntil: "networkidle" });
       await page.evaluate(() => document.fonts.ready);
       await page.waitForFunction(() => [...document.images].every((img) => img.complete));
       const screenshot = await page.screenshot();
-      await sharp(screenshot)
+      const buffer = await sharp(screenshot)
         .extract({ left: 0, top: 0, ...size })
         .withMetadata({ density: cardConfig.dpi })
-        .toFile(`${OUT_DIR}/${name}`);
-      if (values.public) copyFileSync(`${OUT_DIR}/${name}`, `${PUBLIC_DIR}/${name}`);
-      console.log(`ok  ${name}`);
+        .toBuffer();
+      for (let copy = 1; copy <= card.cardCount; copy++) {
+        const name = printFileName(card.name, copy, card.cardCount);
+        writeFileSync(`${OUT_DIR}/${name}`, buffer);
+        if (values.public) writeFileSync(`${PUBLIC_DIR}/${name}`, buffer);
+        console.log(`ok  ${name}`);
+      }
     } catch (error) {
-      failures.push(name);
-      console.error(`erro ${name}: ${(error as Error).message}`);
+      failures.push(card.name);
+      failedCopies += card.cardCount;
+      console.error(`erro ${card.name}: ${(error as Error).message}`);
     }
   }
 } finally {
@@ -75,5 +87,5 @@ try {
   await server.stop();
 }
 
-console.log(`\n${total - failures.length}/${total} cartas em ${OUT_DIR}${values.public ? ` (+ ${PUBLIC_DIR})` : ""}`);
+console.log(`\n${total - failedCopies}/${total} cartas em ${OUT_DIR}${values.public ? ` (+ ${PUBLIC_DIR})` : ""}`);
 if (failures.length) process.exit(1);

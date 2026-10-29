@@ -2,4 +2,4 @@
 import { getCards } from "../../lib/cards";
 
 export const GET = () =>
-  Response.json(getCards().map(({ id, name, fileName }) => ({ id, name, fileName })));
+  Response.json(getCards().map(({ id, name, fileName, cardCount }) => ({ id, name, fileName, cardCount })));
