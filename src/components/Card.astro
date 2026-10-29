@@ -28,12 +28,16 @@ const artVars = [
 const dex = `#${String(card.id).padStart(3, "0")}`;
 const text = card.text || card.originalText;
 const passive = card.passive || card.originalPassive;
+// Sem texto nem pontos extras, só os pontos base aparecem, centralizados e sem divisor
+const hasText = Boolean(text) || card.extraPoints !== 0;
 // Keywords marcadas nos dados com **termo** viram negrito e esclarecimentos *(...)* viram itálico
 const richText = (s: string) =>
   s
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
+    // Condição **SE** no início do texto ganha destaque próprio
+    .replace(/^\s*\*\*SE\*\*/, '<strong class="card-if">SE</strong>')
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     // O ponto final depois do esclarecimento fica no fim da frase, não sozinho na linha de baixo
@@ -84,17 +88,23 @@ const richText = (s: string) =>
           <div class="card-bar card-bar-top" />
         )
       }
-      <div class="card-body">
+      <div class:list={["card-body", { "card-body-solo": !hasText }]}>
         <div class="card-points-slot">
           <div class:list={["card-points", { "card-points-long": String(card.basePoint).length > 1 }]}>{card.basePoint}</div>
         </div>
-        <div class="card-bar card-bar-divider"></div>
-        <div class="card-text">
-          {card.extraPoints !== 0 && <div class="card-extra"><span class="card-extra-plus">+</span>{card.extraPoints}</div>}
-          <div class="card-text-body">
-            {text && <p set:html={richText(text)} />}
-          </div>
-        </div>
+        {
+          hasText && (
+            <>
+              <div class="card-bar card-bar-divider" />
+              <div class="card-text">
+                {card.extraPoints !== 0 && <div class="card-extra"><span class="card-extra-plus">+</span>{card.extraPoints}</div>}
+                <div class="card-text-body">
+                  {text && <p set:html={richText(text)} />}
+                </div>
+              </div>
+            </>
+          )
+        }
       </div>
       <div class="card-bar card-bar-bottom"></div>
     </div>

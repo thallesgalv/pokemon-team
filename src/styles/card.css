@@ -194,7 +194,7 @@
 .card-passive {
   flex: none;
   box-sizing: border-box;
-  height: 88px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,6 +214,16 @@
   min-height: 0;
   display: flex;
   align-items: center;
+}
+
+/* Sem texto: só os pontos, centralizados, sem divisor */
+.card-body-solo {
+  justify-content: center;
+}
+
+.card-body-solo .card-points-slot {
+  width: auto;
+  padding-left: 0;
 }
 
 .card-points-slot {
@@ -295,6 +305,14 @@
 
 .card-text p {
   margin: 0;
+}
+
+/* Condição SE no início do texto */
+.card .card-if {
+  color: #fff;
+  background: #344358;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
 }
 
 /* Esclarecimentos de regra *(...)* em itálico e levemente menores */
