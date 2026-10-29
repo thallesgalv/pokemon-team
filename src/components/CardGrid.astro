@@ -1,0 +1,45 @@
+---
+import { existsSync } from "node:fs";
+import Card from "./Card.astro";
+import { getCards } from "../lib/cards";
+
+const cards = getCards();
+// PNGs só existem depois de `npm run cards -- --public`
+const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
+---
+
+<div class="card-grid not-content">
+  {
+    cards.map((card) => (
+      <figure>
+        <Card card={card} />
+        {hasPng(card.fileName) && (
+          <a href={`/cards/${card.fileName}`} download>
+            PNG
+          </a>
+        )}
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+  }
+
+  figure a {
+    font-size: 0.8rem;
+  }
+</style>

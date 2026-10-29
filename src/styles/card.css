@@ -1,25 +1,23 @@
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  background: #f4f4f4;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
-  padding: 16px;
-}
-
 .card {
+  --card-bleed: 0mm;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 160px;
-  padding: 10px;
+  width: calc(var(--card-w) + 2 * var(--card-bleed));
+  height: calc(var(--card-h) + 2 * var(--card-bleed));
+  padding: calc(10px + var(--card-bleed));
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: #111;
+  font-family: system-ui, sans-serif;
+  line-height: 1.3;
+}
+
+.card[data-bleed] {
+  --card-bleed: var(--card-bleed-size);
+  border-radius: 0;
+  border: none;
 }
 
 .card-top {

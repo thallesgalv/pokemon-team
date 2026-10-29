@@ -1,4 +1,4 @@
-import csv from "../base/csv/pokemonInfo.csv?raw";
+import csv from "../../base/csv/pokemonInfo.csv?raw";
 
 export type PokemonInfo = {
   pokedexNumber: number;

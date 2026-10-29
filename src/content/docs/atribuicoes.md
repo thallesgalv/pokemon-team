@@ -1,4 +1,6 @@
-# Atribuições Pokémon das cartas
+---
+title: Atribuições Pokémon das cartas
+---
 
 Justificativa de cada Pokémon em `data/cardList.ts`. As regras de atribuição estão na skill `.claude/skills/assemblingCard/SKILL.md`.
 

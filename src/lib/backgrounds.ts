@@ -28,8 +28,8 @@ export const fallbackColor = "#dddddd";
 // Imagens de assets/bg/<BACKGROUND>.png; quem não tem imagem usa a cor acima
 const backgroundImages: Record<string, string> = Object.fromEntries(
   Object.entries(
-    import.meta.glob<string>("../assets/bg/*.png", { eager: true, import: "default" }),
-  ).map(([path, url]) => [path.split("/").pop()!.replace(".png", ""), url]),
+    import.meta.glob<ImageMetadata>("../../assets/bg/*.png", { eager: true, import: "default" }),
+  ).map(([path, image]) => [path.split("/").pop()!.replace(".png", ""), image.src]),
 );
 
 export const cardBackground = (background?: string) => {

@@ -36,7 +36,7 @@ Gera objetos `Card` válidos para testes e protótipos.
 ## Exemplo de saída
 
 ```ts
-import { Card } from "../types/cardType";
+import type { Card } from "../types/cardType";
 
 export const mockCards: Card[] = [
   {

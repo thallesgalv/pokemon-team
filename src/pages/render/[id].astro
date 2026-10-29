@@ -1,0 +1,26 @@
+---
+// Página crua (sem Starlight) com uma carta no tamanho físico. Usada pelo CLI de render.
+import Card from "../../components/Card.astro";
+import { getCards, type CardView } from "../../lib/cards";
+
+export const getStaticPaths = () => getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } }));
+
+const { card } = Astro.props as { card: CardView };
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>{card.name}</title>
+    <style is:global>
+      body {
+        margin: 0;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <Card card={card} bleed />
+  </body>
+</html>

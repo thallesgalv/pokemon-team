@@ -4,19 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "cards": "node scripts/render-cards.ts"
   },
   "devDependencies": {
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.2",
-    "typescript": "^7.0.2",
-    "vite": "^8.3.5"
+    "playwright": "^1.64.1",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.7",
+    "astro": "^7.4.4",
+    "sharp": "^0.35.5"
   }
 }

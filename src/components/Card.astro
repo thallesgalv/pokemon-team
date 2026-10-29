@@ -1,0 +1,40 @@
+---
+import { cardConfig } from "../../card.config";
+import type { CardView } from "../lib/cards";
+import "../styles/card.css";
+
+interface Props {
+  card: CardView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+const { info } = card;
+const vars = [
+  `--card-w: ${cardConfig.widthMm}mm`,
+  `--card-h: ${cardConfig.heightMm}mm`,
+  `--card-bleed-size: ${cardConfig.bleedMm}mm`,
+  `background: ${card.background}`,
+].join("; ");
+---
+
+<article class="card" style={vars} data-card-id={card.id} data-bleed={bleed && cardConfig.bleedMm > 0 ? "" : undefined}>
+  <header class="card-top">
+    <span>{card.baseRank}</span>
+    <span>x{card.cardCount}</span>
+  </header>
+  <h2 class="card-name">
+    {card.name} <small>({card.originalName})</small>
+  </h2>
+  <img class="card-img" src={card.sprite} alt={card.name} />
+  <p class="card-points">
+    <strong>Base: {card.basePoint}</strong>
+    {card.extraPoints !== 0 && <strong>Extra: +{card.extraPoints}</strong>}
+  </p>
+  {card.originalText && <p class="card-text">{card.originalText}</p>}
+  {card.originalPassive && <p class="card-text">{card.originalPassive}</p>}
+  <footer class="card-bottom">
+    <span>Community: {card.communityRank.join(" / ")}</span>
+    <span>Pessoal: {info?.personalTierlistRank ?? "-"}</span>
+  </footer>
+</article>

@@ -1,4 +1,4 @@
-import { Card } from "../types/cardType";
+import type { Card } from "../types/cardType";
 
 export const cardList: Card[] = [
   {
