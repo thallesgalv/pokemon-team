@@ -9,7 +9,7 @@ export default defineConfig({
       locales: { root: { label: "Português", lang: "pt-BR" } },
       sidebar: [
         { label: "Cartas", link: "/" },
-        { label: "Regras", slug: "regras" },
+        { label: "Regras", items: [{ autogenerate: { directory: "regras" } }] },
       ],
     }),
   ],
