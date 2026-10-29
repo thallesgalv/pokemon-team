@@ -1,5 +1,6 @@
 ---
 import { cardConfig } from "../../card.config";
+import pokeball from "../../assets/other/pokeball.png";
 import type { CardView } from "../lib/cards";
 import "../styles/card.css";
 
@@ -9,32 +10,70 @@ interface Props {
 }
 
 const { card, bleed = false } = Astro.props;
-const { info } = card;
+const { accent } = card;
+// Layout desenhado em pixels de impressão (744×1039 para 63×88mm a 300 DPI)
+const printPx = (mm: number) => Math.round((mm / 25.4) * cardConfig.dpi);
 const vars = [
-  `--card-w: ${cardConfig.widthMm}mm`,
-  `--card-h: ${cardConfig.heightMm}mm`,
-  `--card-bleed-size: ${cardConfig.bleedMm}mm`,
-  `background: ${card.background}`,
+  `--card-w: ${printPx(cardConfig.widthMm)}px`,
+  `--card-h: ${printPx(cardConfig.heightMm)}px`,
+  `--card-bleed: ${bleed ? printPx(cardConfig.bleedMm) : 0}px`,
+  `--accent: ${accent}`,
 ].join("; ");
+const { size, left, right, top, bottom } = card.imageEdition;
+const artVars = [
+  `--art-x: ${left - right}px`,
+  `--art-y: ${top - bottom}px`,
+  `--art-scale: ${size}`,
+].join("; ");
+const dex = `#${String(card.id).padStart(3, "0")}`;
+const text = card.text || card.originalText;
+const passive = card.passive || card.originalPassive;
 ---
 
-<article class="card" style={vars} data-card-id={card.id} data-bleed={bleed && cardConfig.bleedMm > 0 ? "" : undefined}>
-  <header class="card-top">
-    <span>{card.baseRank}</span>
-    <span>x{card.cardCount}</span>
-  </header>
-  <h2 class="card-name">
-    {card.name} <small>({card.originalName})</small>
-  </h2>
-  <img class="card-img" src={card.sprite} alt={card.name} />
-  <p class="card-points">
-    <strong>Base: {card.basePoint}</strong>
-    {card.extraPoints !== 0 && <strong>Extra: +{card.extraPoints}</strong>}
-  </p>
-  {card.originalText && <p class="card-text">{card.originalText}</p>}
-  {card.originalPassive && <p class="card-text">{card.originalPassive}</p>}
-  <footer class="card-bottom">
-    <span>Community: {card.communityRank.join(" / ")}</span>
-    <span>Pessoal: {info?.personalTierlistRank ?? "-"}</span>
-  </footer>
+<article class="card" style={vars} data-card-id={card.id}>
+  <div class="card-face">
+    <div class="card-bg" style={`background: ${card.background}`}></div>
+
+    {
+      card.art ? (
+        <img class="card-art" src={card.art} alt={card.name} style={artVars} />
+      ) : (
+        <div class="card-art card-art-missing">
+          sem arte
+          <br />
+          {card.name}.png
+        </div>
+      )
+    }
+
+    <div class="card-pokeball">
+      <img src={pokeball.src} alt="" width="145" height="139" />
+      <span class="card-dex">{dex}</span>
+      <span class="card-pool">{card.pool}</span>
+    </div>
+
+    <div class="card-title">
+      <span class="card-rank">{card.baseRank}</span>
+      <h2 class="card-name">{card.name}</h2>
+      <div class="card-count">
+        <svg width="65" height="73" viewBox="0 0 65 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.24504 16.0566L37.2228 8.29204C40.4236 7.43439 43.7136 9.33388 44.5713 12.5347L55.5407 53.473C56.3983 56.6738 54.4988 59.9638 51.298 60.8215L22.3203 68.586C19.1195 69.4437 15.8294 67.5442 14.9718 64.3434L4.0024 23.4051C3.14475 20.2043 5.04425 16.9143 8.24504 16.0566Z" fill="#F7ECE6" stroke-width="4" stroke={accent}></path>
+          <path d="M26.5107 2H56.5107C59.8245 2 62.5107 4.68629 62.5107 8V60C62.5107 63.3137 59.8245 66 56.5107 66H26.5107C23.197 66 20.5107 63.3137 20.5107 60V8C20.5107 4.68629 23.197 2 26.5107 2Z" fill="#F7ECE6" stroke-width="4" stroke={accent}></path>
+        </svg>
+        <span>{card.cardCount}</span>
+      </div>
+    </div>
+
+    <div class="card-bar card-bar-top"></div>
+    <div class:list={["card-points", { "card-points-long": String(card.basePoint).length > 1 }]}>{card.basePoint}</div>
+    <div class="card-bar card-bar-divider"></div>
+    <div class="card-text">
+      {card.extraPoints !== 0 && <div class="card-extra"><span class="card-extra-plus">+</span>{card.extraPoints}</div>}
+      <div class="card-text-body">
+        {text && <p>{text}</p>}
+        {passive && <p>{passive}</p>}
+      </div>
+    </div>
+    <div class="card-bar card-bar-bottom"></div>
+  </div>
 </article>

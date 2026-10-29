@@ -1,67 +1,266 @@
+@font-face {
+  font-family: "Arial";
+  src: url("../assets/fonts/arial.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../assets/fonts/ariali.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../assets/fonts/arialbd.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../assets/fonts/arialbi.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Arial Black";
+  src: url("../assets/fonts/ariblk.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Medidas em pixels de impressão: a carta tem 744×1039 (63×88mm a 300 DPI) */
 .card {
-  --card-bleed: 0mm;
+  box-sizing: content-box;
+  width: var(--card-w);
+  height: var(--card-h);
+  padding: var(--card-bleed);
+  background: #fff;
+  color: #000;
+  font-family: "Arial", sans-serif;
+  line-height: 1.2;
+}
+
+.card-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-face > * {
+  position: absolute;
+  margin: 0;
+}
+
+/* Texto branco com contorno externo na cor de destaque */
+.card-rank,
+.card-name,
+.card-count span {
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  color: #fff;
+  paint-order: stroke fill;
+}
+
+.card-bg {
+  top: 40px;
+  left: 39px;
+  width: 666px;
+  height: 671px;
+}
+
+/* Arte no tamanho original do arquivo, centralizada */
+.card-art {
+  top: 40px;
+  left: 50%;
+  transform: translate(calc(-50% + var(--art-x, 0px)), var(--art-y, 0px)) scale(var(--art-scale, 1));
+}
+
+.card-art-missing {
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: calc(var(--card-w) + 2 * var(--card-bleed));
-  height: calc(var(--card-h) + 2 * var(--card-bleed));
-  padding: calc(10px + var(--card-bleed));
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: #111;
-  font-family: system-ui, sans-serif;
-  line-height: 1.3;
-}
-
-.card[data-bleed] {
-  --card-bleed: var(--card-bleed-size);
-  border-radius: 0;
-  border: none;
-}
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.card-name {
-  margin: 8px 0;
-  font-size: 1.1rem;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 500px;
+  border: 4px dashed rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  font-size: 32px;
   text-align: center;
 }
 
-.card-name small {
-  font-weight: normal;
-  font-size: 0.8rem;
+.card-pokeball {
+  top: 0;
+  left: 599px;
+  width: 145px;
+  height: 139px;
 }
 
-.card-bottom {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8rem;
-}
-
-.card-img {
+.card-pokeball img {
   display: block;
-  margin: 0 auto;
-  height: 96px;
-  image-rendering: pixelated;
 }
 
-.card-text {
-  margin: 4px 0;
-  font-size: 0.8rem;
-  font-style: italic;
-  text-align: center;
+.card-dex,
+.card-pool {
+  position: absolute;
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  transform: translate(-50%, -50%) rotate(34.7deg);
+  white-space: nowrap;
+}
+
+.card-dex {
+  top: 50px;
+  left: 83px;
+  font-size: 28px;
+  color: #fff;
+}
+
+.card-pool {
+  top: 85px;
+  left: 60px;
+  font-size: 32px;
+  color: #000;
+}
+
+.card-title {
+  top: 606px;
+  left: 59px;
+  right: 59px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-rank,
+.card-name {
+  font-size: 64px;
+  -webkit-text-stroke: 8px var(--accent);
+}
+
+/* Centralizado na carta, independente do rank e do contador */
+.card-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.card-count {
+  position: relative;
+  width: 65px;
+  height: 73px;
+}
+
+.card-count svg {
+  display: block;
+}
+
+.card-count span {
+  position: absolute;
+  top: 34px;
+  left: 41.5px;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  -webkit-text-stroke: 4px var(--accent);
+}
+
+.card-bar {
+  background: var(--accent);
+}
+
+.card-bar-top {
+  top: 721px;
+  left: 39px;
+  width: 666px;
+  height: 8px;
+}
+
+.card-bar-bottom {
+  top: 990px;
+  left: 39px;
+  width: 666px;
+  height: 8px;
+}
+
+.card-bar-divider {
+  top: 735px;
+  left: 210px;
+  width: 8px;
+  height: 248px;
+}
+
+.card-points,
+.card-extra {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 8px solid #344358;
+  border-radius: 50%;
+  background: #d8d999;
+  color: #344358;
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  /* Contorno interno fino: folga na cor do fundo + anel. Feito com sombra (e não ::before)
+     para acompanhar a borda sem arredondamento torto quando a carta é exibida com zoom */
+  box-shadow:
+    inset 0 0 0 4px #d8d999,
+    inset 0 0 0 6px #344358;
 }
 
 .card-points {
+  top: 799px;
+  left: 60px;
+  width: 120px;
+  height: 120px;
+  font-size: 92px;
+}
+
+/* Valores com mais de um caractere (ex.: -1) */
+.card-points-long {
+  font-size: 64px;
+}
+
+.card-extra {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  border-width: 6px;
+  font-size: 44px;
+  box-shadow:
+    inset 0 0 0 3px #d8d999,
+    inset 0 0 0 5px #344358;
+}
+
+.card-extra-plus {
+  font-size: 30px;
+}
+
+.card-text {
+  top: 729px;
+  left: 238px;
+  right: 39px;
+  height: 261px;
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 4px 0;
-  font-size: 0.9rem;
+  align-items: center;
+  gap: 16px;
+  font-size: 36px;
+}
+
+.card-text-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.card-text p {
+  margin: 0;
 }

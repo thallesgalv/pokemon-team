@@ -15,14 +15,14 @@ pokedexNumber,name,background,personalTierlistRank
 28,Sandslash,GROUND_BROWN,D
 31,Nidoqueen,POISON_PINK,B
 34,Nidoking,POISON_PINK,B
+35,Clefairy,NORMAL_MAGENTA,UNRANKED
 38,Ninetales,FIRE_RED,C
 39,Jigglypuff,NORMAL_GREEN,UNRANKED
 52,Meowth,NORMAL_PINK,UNRANKED
-54,Psyduck,WATER_BLUE,UNRANKED
 55,Golduck,WATER_BLUE,C
 57,Primeape,FIGHTING_RED,C
 59,Arcanine,FIRE_RED,A
-62,Poliwrath,WATER_BLUE,D
+62,Poliwrath,WATER_DARKBLUE,D
 65,Alakazam,PSYCHIC_PINK,A
 68,Machamp,FIGHTING_YELLOW,A
 76,Golem,ROCK_BLUE,B
@@ -37,7 +37,7 @@ pokedexNumber,name,background,personalTierlistRank
 106,Hitmonlee,FIGHTING_YELLOW,D
 107,Hitmonchan,FIGHTING_YELLOW,D
 110,Weezing,POISON_PINK,E
-112,Rhydon,GROUND_BLUE,A
+112,Rhydon,ROCK_BLUE,A
 115,Kangaskhan,NORMAL_MAGENTA,B
 121,Starmie,WATER_BLUE,C
 123,Scyther,FLYING_BLUE,B
@@ -53,7 +53,7 @@ pokedexNumber,name,background,personalTierlistRank
 134,Vaporeon,WATER_BLUE,C
 135,Jolteon,ELETRIC_TEAL,C
 136,Flareon,FIRE_RED,C
-141,Kabutops,GROUND_BLUE,C
+141,Kabutops,ROCK_BLUE,C
 142,Aerodactyl,FLYING_BLUE,A
 143,Snorlax,NORMAL_PINK,A
 144,Articuno,ICE_BLUE,SS

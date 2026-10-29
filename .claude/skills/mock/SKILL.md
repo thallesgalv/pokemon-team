@@ -23,9 +23,10 @@ Gera objetos `Card` válidos para testes e protótipos.
 1. Todo objeto deve satisfazer o tipo `Card` sem erros de TypeScript.
 2. `id` sequencial e único, começando do próximo id livre.
 3. `basePoint` é um número ou a string `"="`.
-4. `pool` só pode ser `1`, `2` ou `"Promo"`.
+4. `pool` só pode ser `"A"`, `"B"` ou `"PRM"`.
 5. `communityRank` é um array de `CommunityRank`; use `["UNRANKED"]` por padrão.
-6. Textos em português.
+6. `imageEdition` usa `{ size: 1, left: 0, right: 0, top: 0, bottom: 0 }` por padrão.
+7. Textos em português.
 <!-- TODO: adicione aqui regras do jogo (faixas de baseRank, cardCount, etc.) -->
 
 ## Onde salvar
@@ -51,8 +52,9 @@ export const mockCards: Card[] = [
     originalPassive: "Custa 3 para dispensar em vez de 5.",
     text: "",
     passive: "",
-    pool: 1,
+    pool: "A",
     communityRank: ["UNRANKED"],
+    imageEdition: { size: 1, left: 0, right: 0, top: 0, bottom: 0 },
   },
 ];
 ```

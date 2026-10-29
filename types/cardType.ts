@@ -1,5 +1,15 @@
 export type CommunityRank = "SS" | "S" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "UNRANKED";
 
+// Ajuste manual da arte: size é multiplicador (1 = tamanho original);
+// left/right/top/bottom em px, como no CSS (left: 20 empurra a imagem 20px para a direita)
+export type ImageEdition = {
+  size: number;
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+};
+
 export type Card = {
   id: number;
   name: string;
@@ -12,6 +22,7 @@ export type Card = {
   originalPassive: string;
   text: string;
   passive: string;
-  pool: 1 | 2 | "Promo";
+  pool: "A" | "B" | "PRM";
   communityRank: CommunityRank[];
+  imageEdition: ImageEdition;
 };

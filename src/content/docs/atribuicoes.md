@@ -7,7 +7,7 @@ Justificativa de cada Pokémon em `data/cardList.ts`. As regras de atribuição 
 ## Pré-atribuídas
 Escolhas feitas à mão, sem passar pelo critério de tier:
 
-- **Baralho inicial:** Lagarta = Caterpie, Gambá = Pikachu, Mosquito = Rattata, Lesma = Bulbasaur, Abelha = Jigglypuff, Libélula = Charmander, Ladybug = Eevee, Firefly = Meowth, Grasshoper = Squirtle, Spider = Psyduck
+- **Baralho inicial:** Lagarta = Caterpie, Gambá = Pikachu, Mosquito = Rattata, Lesma = Bulbasaur, Abelha = Jigglypuff, Libélula = Charmander, Ladybug = Eevee, Firefly = Meowth, Grasshoper = Squirtle, Spider = Clefairy
 - **Peixes = lutadores:** Shark = Poliwrath, Goldfish = Machamp, Clownfish = Primeape, Starfish = Hitmonlee, Swordfish = Hitmonchan
 - **Promos:** Axolotl = Nidoking, Platypus = Nidoqueen
 - **Associações óbvias:** Vaca = Ditto (copia valores), Borboleta = Butterfree (ligada a Lagarta/Caterpie), Sloth = Mewtwo (maior tier e baseRank), Camelo = Tauros (muitas cópias), Gato = Charizard (popular, SS na comunidade)

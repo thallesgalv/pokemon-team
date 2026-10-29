@@ -20,7 +20,7 @@ Todasas cartas presentes em data/cardList.ts (Cartas Originais de Fliptoons) dev
 - Ladybug = Eevee
 - Firefly = Meowth
 - Grasshoper = Squirtle
-- Spider = Psyduck
+- Spider = Clefairy
 
 ### Tipos Lutadores serão atribuídos ao "Fish" (Peixe)
 - Shark = Poliwrath (Lutador não puro, assim como peixe não puro)

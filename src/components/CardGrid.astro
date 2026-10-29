@@ -39,7 +39,19 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
     margin: 0;
   }
 
+  /* A carta é desenhada em pixels de impressão; no wiki mostramos em escala reduzida */
+  figure :global(.card) {
+    zoom: 0.35;
+  }
+
   figure a {
     font-size: 0.8rem;
+  }
+
+  /* No desktop, a página do grid usa toda a largura em vez da coluna de 45rem do Starlight */
+  @media (min-width: 50rem) {
+    :global(:root:has(.card-grid)) {
+      --sl-content-width: 100%;
+    }
   }
 </style>

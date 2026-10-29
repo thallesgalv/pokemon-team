@@ -18,6 +18,19 @@ npm run build
 
 Páginas em `src/content/docs/`. A carta é um único componente (`src/components/Card.astro`), usado pelo wiki e pelo render.
 
+## Imagens
+
+Imagens-fonte ficam em `assets/` (versionadas), encontradas pela chave que já existe nos dados:
+
+| Pasta | Nome do arquivo | Formato |
+|---|---|---|
+| `assets/bg/` | valor da coluna `background` de `base/csv/pokemonInfo.csv` (ex.: `FIRE_RED.png`) | retrato, ≥ 744×1039px (≥ 815×1110px com sangria de 3mm) |
+| `assets/pokemon/` | `name` da carta em `data/cardList.ts` (ex.: `Pikachu.png`) | PNG com fundo transparente, usado no tamanho original (≈ 331×564px) |
+
+Carta sem arte mostra um placeholder com o nome do arquivo esperado. Fontes (Arial, Arial Black) ficam em `src/assets/fonts/`.
+
+O layout da carta é desenhado em pixels de impressão (744×1039); referência visual em `assets/EXAMPLECARD.png`.
+
 ## Cartas para impressão
 
 ```sh

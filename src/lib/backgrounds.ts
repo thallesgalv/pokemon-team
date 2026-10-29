@@ -25,6 +25,35 @@ export const backgroundColors: Record<string, string> = {
 
 export const fallbackColor = "#dddddd";
 
+// Cor de contorno dos textos, barras e ícone de cópias, por background
+const accentColors: Record<string, string> = {
+  DRAGON_BLUE: "#494580",
+  ELETRIC_TEAL: "#477062",
+  FIGHTING_RED: "#9F6554",
+  FIGHTING_YELLOW: "#D7C443",
+  FIRE_RED: "#B74230",
+  FLYING_BLUE: "#494580",
+  GHOST_PINK: "#B74230",
+  GRASS_DARKGREEN: "#496946",
+  GRASS_LIGHTGREEN: "#016630",
+  GROUND_BROWN: "#6C6857",
+  ICE_BLUE: "#A4A2C8",
+  INSECT_YELLOW: "#B2A03B",
+  NORMAL_GREEN: "#4F624F",
+  NORMAL_MAGENTA: "#A47672",
+  NORMAL_PINK: "#783254",
+  POISON_PINK: "#6D362F",
+  PSYCHIC_PINK: "#8C4165",
+  ROCK_BLACK: "#86645F",
+  ROCK_BLUE: "#666E78",
+  WATER_BLUE: "#1D19A2",
+  WATER_DARKBLUE: "#282F4B",
+};
+
+export const fallbackAccent = "#344358";
+
+export const cardAccent = (background?: string) => (background && accentColors[background]) ?? fallbackAccent;
+
 // Imagens de assets/bg/<BACKGROUND>.png; quem não tem imagem usa a cor acima
 const backgroundImages: Record<string, string> = Object.fromEntries(
   Object.entries(

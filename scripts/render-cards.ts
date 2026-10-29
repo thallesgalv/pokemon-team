@@ -28,15 +28,14 @@ const server = await preview({ server: { port: PORT }, logLevel: "warn" });
 mkdirSync(OUT_DIR, { recursive: true });
 if (values.public) mkdirSync(PUBLIC_DIR, { recursive: true });
 
-// Tamanho final em pixels de impressão. O Playwright arredonda o clip para px CSS inteiros,
-// então capturamos um pouco a mais e recortamos o tamanho exato com o sharp.
-const scale = cardConfig.dpi / 96;
+// A carta já é desenhada em pixels de impressão (1 px CSS = 1 px do PNG); o sharp recorta
+// o tamanho exato e grava o DPI no arquivo.
 const printPx = (mm: number) => Math.round((mm / 25.4) * cardConfig.dpi);
 const size = {
   width: printPx(cardConfig.widthMm + 2 * cardConfig.bleedMm),
   height: printPx(cardConfig.heightMm + 2 * cardConfig.bleedMm),
 };
-const viewport = { width: Math.ceil(size.width / scale) + 1, height: Math.ceil(size.height / scale) + 1 };
+const viewport = { width: size.width + 1, height: size.height + 1 };
 const browser = await chromium.launch();
 const failures: string[] = [];
 let total = 0;
@@ -50,7 +49,6 @@ try {
 
   const page = await browser.newPage({
     viewport,
-    deviceScaleFactor: scale,
   });
 
   total = cards.length;
