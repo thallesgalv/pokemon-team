@@ -10,7 +10,6 @@ export default defineConfig({
       sidebar: [
         { label: "Cartas", link: "/" },
         { label: "Regras", slug: "regras" },
-        { label: "Atribuições", slug: "atribuicoes" },
       ],
     }),
   ],

@@ -28,6 +28,8 @@ const artVars = [
 const dex = `#${String(card.id).padStart(3, "0")}`;
 const text = card.text || card.originalText;
 const passive = card.passive || card.originalPassive;
+// Passiva com a condição "Lutador" ao final ganha corte diagonal com fundo marrom
+const lutadorSplit = passive?.match(/^(.*?)\s*\*\*Lutador\*\*\.?\s*$/s);
 // Sem texto nem pontos extras, só os pontos base aparecem, centralizados e sem divisor
 const hasText = Boolean(text) || card.extraPoints !== 0;
 // Keywords marcadas nos dados com **termo** viram negrito e esclarecimentos *(...)* viram itálico
@@ -81,9 +83,16 @@ const richText = (s: string) =>
     <div class="card-bottom">
       {
         passive ? (
-          <div class="card-passive">
-            <p set:html={richText(passive)} />
-          </div>
+          lutadorSplit ? (
+            <div class="card-passive card-passive-split">
+              <div class="card-passive-main"><p set:html={richText(lutadorSplit[1])} /></div>
+              <div class="card-passive-lutador"><p>Lutador</p></div>
+            </div>
+          ) : (
+            <div class="card-passive">
+              <p set:html={richText(passive)} />
+            </div>
+          )
         ) : (
           <div class="card-bar card-bar-top" />
         )

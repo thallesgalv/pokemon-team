@@ -475,7 +475,7 @@ export const cardList: Card[] = [
     extraPoints: 0,
     originalText: "Copie a fama de um Toon adjascente",
     originalPassive: "",
-    text: "Copie os Pontos de um Pokémon **adjacente** *(Diagonais não contam. Se o adjacente for uma pilha, copie apenas uma carta dela)*.",
+    text: "Copie os pontos de um Pokémon **adjacente** *(Diagonais não contam. Se o adjacente for uma pilha, copie apenas uma carta dela)*.",
     passive: "",
     pool: "A",
     communityRank: ["C", "C", "B"],

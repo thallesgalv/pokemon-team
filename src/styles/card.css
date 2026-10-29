@@ -194,7 +194,7 @@
 .card-passive {
   flex: none;
   box-sizing: border-box;
-  height: 80px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,6 +206,45 @@
 }
 
 .card-passive p {
+  margin: 0;
+}
+
+/* Passiva com a condição "Lutador": corte diagonal com o lado "Lutador" em marrom */
+.card-passive-split {
+  position: relative;
+  padding: 0;
+  background: none;
+}
+
+.card-passive-main,
+.card-passive-lutador {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.card-passive-main {
+  background: #344358;
+  justify-content: flex-start;
+  padding-left: 24px;
+  padding-right: 100px;
+  clip-path: polygon(0 0, 72% 0, 60% 100%, 0 100%);
+}
+
+.card-passive-lutador {
+  background: #a87953;
+  justify-content: flex-end;
+  padding-right: 24px;
+  padding-left: 60px;
+  clip-path: polygon(72% 0, 100% 0, 100% 100%, 60% 100%);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-passive-main p,
+.card-passive-lutador p {
   margin: 0;
 }
 
