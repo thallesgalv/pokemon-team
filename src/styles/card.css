@@ -173,25 +173,60 @@
   background: var(--accent);
 }
 
-.card-bar-top {
+/* Faixa sob a imagem, pontos/divisor/texto e faixa final empilhados em coluna */
+.card-bottom {
   top: 721px;
   left: 39px;
   width: 666px;
+  height: 277px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-bar-top,
+.card-bar-bottom {
+  flex: none;
   height: 8px;
 }
 
-.card-bar-bottom {
-  top: 990px;
-  left: 39px;
-  width: 666px;
-  height: 8px;
+/* Substitui a faixa sob a imagem quando a carta tem passiva. Altura fixa (cabe 2 linhas)
+   para todas as cartas com passiva terem a mesma área de texto */
+.card-passive {
+  flex: none;
+  box-sizing: border-box;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  background: #344358;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+
+.card-passive p {
+  margin: 0;
+}
+
+.card-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+}
+
+.card-points-slot {
+  flex: none;
+  width: 150px;
+  padding-left: 21px;
 }
 
 .card-bar-divider {
-  top: 735px;
-  left: 210px;
+  flex: none;
+  align-self: stretch;
   width: 8px;
-  height: 248px;
+  margin: 6px 0 7px;
 }
 
 .card-points,
@@ -215,8 +250,6 @@
 }
 
 .card-points {
-  top: 799px;
-  left: 60px;
   width: 120px;
   height: 120px;
   font-size: 92px;
@@ -243,10 +276,9 @@
 }
 
 .card-text {
-  top: 729px;
-  left: 238px;
-  right: 39px;
-  height: 261px;
+  flex: 1;
+  align-self: stretch;
+  margin-left: 20px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -263,4 +295,17 @@
 
 .card-text p {
   margin: 0;
+}
+
+/* Esclarecimentos de regra *(...)* em itálico e levemente menores */
+.card em {
+  font-style: italic;
+  font-size: 0.85em;
+}
+
+/* No texto principal o esclarecimento vai para a linha de baixo e fica menor */
+.card-text em {
+  display: block;
+  margin-top: 1lh;
+  font-size: 0.7em;
 }

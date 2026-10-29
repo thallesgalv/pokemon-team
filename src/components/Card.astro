@@ -28,6 +28,16 @@ const artVars = [
 const dex = `#${String(card.id).padStart(3, "0")}`;
 const text = card.text || card.originalText;
 const passive = card.passive || card.originalPassive;
+// Keywords marcadas nos dados com **termo** viram negrito e esclarecimentos *(...)* viram itálico
+const richText = (s: string) =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    // O ponto final depois do esclarecimento fica no fim da frase, não sozinho na linha de baixo
+    .replace(/\s*(<em>.+?<\/em>)\./g, ".$1");
 ---
 
 <article class="card" style={vars} data-card-id={card.id}>
@@ -64,16 +74,29 @@ const passive = card.passive || card.originalPassive;
       </div>
     </div>
 
-    <div class="card-bar card-bar-top"></div>
-    <div class:list={["card-points", { "card-points-long": String(card.basePoint).length > 1 }]}>{card.basePoint}</div>
-    <div class="card-bar card-bar-divider"></div>
-    <div class="card-text">
-      {card.extraPoints !== 0 && <div class="card-extra"><span class="card-extra-plus">+</span>{card.extraPoints}</div>}
-      <div class="card-text-body">
-        {text && <p>{text}</p>}
-        {passive && <p>{passive}</p>}
+    <div class="card-bottom">
+      {
+        passive ? (
+          <div class="card-passive">
+            <p set:html={richText(passive)} />
+          </div>
+        ) : (
+          <div class="card-bar card-bar-top" />
+        )
+      }
+      <div class="card-body">
+        <div class="card-points-slot">
+          <div class:list={["card-points", { "card-points-long": String(card.basePoint).length > 1 }]}>{card.basePoint}</div>
+        </div>
+        <div class="card-bar card-bar-divider"></div>
+        <div class="card-text">
+          {card.extraPoints !== 0 && <div class="card-extra"><span class="card-extra-plus">+</span>{card.extraPoints}</div>}
+          <div class="card-text-body">
+            {text && <p set:html={richText(text)} />}
+          </div>
+        </div>
       </div>
+      <div class="card-bar card-bar-bottom"></div>
     </div>
-    <div class="card-bar card-bar-bottom"></div>
   </div>
 </article>
