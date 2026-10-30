@@ -17,7 +17,7 @@ Depois de completar a preparação normal, descarte um número de cartas do bara
 | Normal | 20 |
 | Difícil | 23 |
 
-A carta de primeiro jogador e a carta de escolha do crítico não são usadas no modo solo.
+A carta de primeiro jogador e a carta de primeiro a chegar no Planalto Índigo não são usadas no modo solo.
 
 ## Como Jogar
 
