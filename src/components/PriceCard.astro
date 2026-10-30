@@ -13,7 +13,7 @@ const { card, bleed = false } = Astro.props;
 
 <article class="card price-card" style={cardSizeVars(bleed)} data-card-id={card.id}>
   <!-- Estandarte com raios e ponta para baixo, apontando para o Pokémon da Área de Captura -->
-  <div class="price-banner">
+  <div class:list={["price-banner", `price-banner-${card.color}`]}>
     <div class:list={["card-points", "price-coin", { "price-coin-long": card.price > 9 }]}>{card.price}</div>
   </div>
 </article>
@@ -32,9 +32,19 @@ const { card, bleed = false } = Astro.props;
     padding-bottom: 90px;
     background:
       radial-gradient(circle at 50% 44%, rgb(255 255 255 / 0.18), transparent 60%),
-      repeating-conic-gradient(from 0deg at 50% 44%, #3d9a6b 0deg 7deg, #34895e 7deg 14deg);
+      repeating-conic-gradient(from 0deg at 50% 44%, var(--ray-light) 0deg 7deg, var(--ray-dark) 7deg 14deg);
     clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
     border-radius: 32px 32px 0 0;
+  }
+
+  .price-banner-verde {
+    --ray-light: #3d9a6b;
+    --ray-dark: #34895e;
+  }
+
+  .price-banner-azul {
+    --ray-light: #3d7fc4;
+    --ray-dark: #3470b0;
   }
 
   /* Mesma moeda dos pontos das cartas Pokémon, em tamanho grande */
