@@ -12,11 +12,11 @@ Os jogadores competem para ter mais **pontos** no seu time de Pokémon. A cada r
 ## Componentes
 
 - 110 cartas Pokémon — 53 da Pool A, 53 da Pool B e 4 promocionais (ver [Combinando as Pools](combinando-as-pools/))
-- 24 cartas iniciais — 6 por jogador, para até 4 jogadores (metade delas usada se jogar com a Pool A, a outra metade com a Pool B)
-- 4 cartas de Pontos
-- 4 cartas de referência
-- 5 cartas de preço
+- 48 cartas de Pokémon Incial (24 da pool A, sendo 6 cartas para 4 jogadores; e 24 da pool B, sendo 6 cartas para 4 jogadores)
+- 8 cartas de Pontos
+- 8 cartas de referência
+- 7 cartas de preço (3, 3, 4, 7, 10, 15 e 15)
 - 1 carta de primeiro jogador
 - 1 carta de primeiro a chegar no Planalto Índigo
 
-Cada carta Pokémon mostra um **rank** (usado pra ordenar a Área de Captura e decidir o menor/maior rank do time) e os **Pontos** que ela gera, além do texto do seu efeito especial ou habilidade.
+Cada carta Pokémon mostra um **rank** (usado pra ordenar a Área de Captura e decidir o menor/maior rank do time) e os **pontos** que ela gera, além do texto do seu efeito especial ou habilidade.

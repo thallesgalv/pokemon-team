@@ -11,7 +11,7 @@ sidebar:
    - **Pool B:** 2 Rattata, 1 Eevee, 1 Clefairy, 1 Squirtle e 1 Meowth.
 3. Devolva pra caixa as cartas iniciais, de referência e de Pontos que não forem usadas.
 4. Reserve um espaço no seu time pras cartas dispensadas.
-5. Coloque as 5 cartas de preço no centro da mesa, em ordem crescente da esquerda pra direita (3, 4, 7, 10 e 15). Jogando com 1 ou 2 jogadores, vire as cartas de preço 3 e 15 para o lado alternativo.
+5. Coloque as 5 cartas de preço no centro da mesa, em ordem crescente da esquerda pra direita (3, 4, 7, 10 e 15).
 6. Embaralhe as cartas Pokémon da pool escolhida (sem contar as iniciais) formando o baralho de captura, e coloque-o virado pra baixo.
 7. Revele as 5 cartas do topo do baralho de captura e organize-as por rank (menor à esquerda, maior à direita), uma embaixo de cada carta de preço, formando a Área de Captura.
 8. Coloque a carta de primeiro a chegar no Planalto Índigo virada pra cima perto do baralho de captura.

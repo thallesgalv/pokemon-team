@@ -23,14 +23,14 @@ Todos os jogadores revisam seu time ao mesmo tempo pra determinar quantos Pontos
 
 Se algum jogador gerou 30 Pontos ou mais, quem gerou mais Pontos pega a carta de primeiro a chegar no Planalto Índigo, que vale +3 Pontos na Revelação Final. Se dois ou mais jogadores empatarem na maior pontuação com 30 ou mais, devolva a carta de primeiro a chegar no Planalto Índigo pra caixa — isso também aciona o fim do jogo (ver [Revelação Final](../revelacao-final/)).
 
-**Exemplo:** o time de Jordy, usando o baralho inicial da Pool A, tem Pikachu, Bulbasaur, Jigglypuff, Caterpie, Caterpie e Charmander. Pikachu e Bulbasaur não têm efeito nesse time (0 Pontos cada); Jigglypuff gera 1; os dois Caterpie geram 0 cada; Charmander gera **POR** Pokémon adjacente diferente — como ele está do lado de um Caterpie, soma 1. No total, Jordy gera 2 Pontos nessa rodada.
+**Exemplo:** o time de Thalles, usando o baralho inicial da Pool A, tem Pikachu, Bulbasaur, Jigglypuff, Caterpie, Caterpie e Charmander. Pikachu e Bulbasaur não têm efeito nesse time (0 Pontos cada); Jigglypuff gera 1; os dois Caterpie geram 0 cada; Charmander gera **POR** Pokémon adjacente diferente — como ele está do lado de um Caterpie, soma 1. No total, Thalles gera 2 Pontos nessa rodada.
 
 ## 3. Fase de Captura
 
 A partir do primeiro jogador e seguindo o sentido horário, cada jogador gasta os Pontos que gerou na Contar Pontos para realizar até duas ações. Um jogador pode fazer as duas ações diferentes uma vez cada, ou repetir a mesma ação duas vezes. Há dois tipos de ação:
 
 - **Capturar um Pokémon:** pegue uma carta da Área de Captura, pagando Pontos iguais ao valor mostrado na carta de preço acima dela. Adicione a carta capturada ao seu baralho de Pokémon não revelados.
-- **Dispensar um Pokémon:** remova um Pokémon do seu próprio time por 5 Pontos (salvo se uma habilidade disser outro valor) e coloque-o virado pra cima do lado do seu baralho. Uma carta dispensada não volta a ser embaralhada na Fase de Revelação.
+- **Dispensar um Pokémon:** remova um Pokémon do seu próprio time por 5 pontos (salvo se uma habilidade disser outro valor) e coloque-o virado pra cima do lado do seu baralho. Uma carta dispensada não volta a ser embaralhada na Fase de Revelação.
 
 Algumas regras importantes:
 
@@ -44,7 +44,7 @@ Ao final das ações de cada jogador, reabasteça a Área de Captura: revele car
 
 Se o baralho de captura se esgotar, não adicione mais cartas à Área de Captura — as cartas restantes ficam organizadas abaixo da carta de preço mais alta, em ordem de rank. Se a Área de Captura também se esgotar, complete a rodada normalmente e prossiga para a Revelação Final.
 
-**Exemplo:** Jordy tem 13 Pontos. Na sua primeira ação, ele captura Kabutops da Área de Captura. A habilidade de Kabutops permite capturar de graça qualquer Pokémon dispensado — então ele move um Ninetales do monte de dispensados de um adversário pro seu baralho, sem gastar Pontos. Na segunda ação, Jordy dispensa um Squirtle que está empilhado com um Cloyster; a habilidade de Cloyster reduz o custo de dispensar os Pokémon empilhados com ele em 1, então o Squirtle custa 4 Pontos em vez de 5. Por fim, a habilidade de Golduck obriga Jordy a dispensá-lo, pois ele terminou a rodada na primeira posição do time.
+**Exemplo:** Thalles tem 13 Pontos. Na sua primeira ação, ele captura Kabutops da Área de Captura. A habilidade de Kabutops permite capturar de graça qualquer Pokémon dispensado — então ele move um Ninetales do monte de dispensados de um adversário pro seu baralho, sem gastar Pontos. Na segunda ação, Thalles dispensa um Squirtle que está empilhado com um Cloyster; a habilidade de Cloyster reduz o custo de dispensar os Pokémon empilhados com ele em 1, então o Squirtle custa 4 Pontos em vez de 5. Por fim, a habilidade de Golduck obriga Thalles a dispensá-lo, pois ele terminou a rodada na primeira posição do time.
 
 ## 4. Limpeza
 
