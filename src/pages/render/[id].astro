@@ -2,22 +2,25 @@
 // Página crua (sem Starlight) com uma carta no tamanho físico. Usada pelo CLI de render.
 import Card from "../../components/Card.astro";
 import ScoreCard from "../../components/ScoreCard.astro";
+import PlayerAidCard from "../../components/PlayerAidCard.astro";
 import { getCards, type CardView } from "../../lib/cards";
 import { scoreCards, type ScoreCardView } from "../../lib/scoreCard";
+import { playerAidCards, type PlayerAidView } from "../../lib/playerAid";
 
 export const getStaticPaths = () => [
   ...getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } })),
   ...scoreCards.map((score) => ({ params: { id: score.id }, props: { score } })),
+  ...playerAidCards.map((aid) => ({ params: { id: aid.id }, props: { aid } })),
 ];
 
-const { card, score } = Astro.props as { card?: CardView; score?: ScoreCardView };
+const { card, score, aid } = Astro.props as { card?: CardView; score?: ScoreCardView; aid?: PlayerAidView };
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>{card?.name ?? score?.name}</title>
+    <title>{card?.name ?? score?.name ?? aid?.name}</title>
     <style is:global>
       body {
         margin: 0;
@@ -28,5 +31,6 @@ const { card, score } = Astro.props as { card?: CardView; score?: ScoreCardView 
   <body>
     {card && <Card card={card} bleed />}
     {score && <ScoreCard card={score} bleed />}
+    {aid && <PlayerAidCard card={aid} bleed />}
   </body>
 </html>

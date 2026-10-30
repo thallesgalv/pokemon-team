@@ -1,0 +1,123 @@
+---
+import { cardSizeVars } from "../lib/cards";
+import type { PlayerAidView } from "../lib/playerAid";
+import "../styles/card.css";
+
+interface Props {
+  card: PlayerAidView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+---
+
+<article class="card player-aid" style={cardSizeVars(bleed)} data-card-id={card.id}>
+  <div class:list={["player-aid-body", { "player-aid-dense": card.steps.length > 4 }]}>
+    <div class:list={["player-aid-heading", { "player-aid-heading-right": card.arrow === "right" }]}>
+      <svg class="player-aid-arrow" viewBox="0 0 64 80" width="64" height="80" aria-hidden="true">
+        <path
+          d="M32 6 L58 38 H42 V74 H22 V38 H6 Z"
+          fill="#ffcb05"
+          stroke="#2a75bb"
+          stroke-width="8"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <h2 class="player-aid-title">{card.title}</h2>
+    </div>
+    {
+      card.steps.map((step) => (
+        <section class="player-aid-step">
+          <h3>{step.title}</h3>
+          <p set:html={step.text} />
+        </section>
+      ))
+    }
+  </div>
+</article>
+
+<style>
+  .player-aid {
+    display: flex;
+  }
+
+  .player-aid-body {
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    margin: 40px;
+    padding: 16px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* Mesma borda da carta de placar */
+    border: 6px solid #1a1a1a;
+    border-radius: 40px;
+    text-align: center;
+  }
+
+  /* Amarelo com contorno azul, como o logo */
+  .player-aid-title,
+  .player-aid-step h3 {
+    margin: 0;
+    font-family: "Pokemon Solid", "Arial Black", sans-serif;
+    font-weight: 400;
+    color: #ffcb05;
+    paint-order: stroke fill;
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+
+  .player-aid-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  /* Seta à direita: mesma marcação, ordem invertida */
+  .player-aid-heading-right {
+    flex-direction: row-reverse;
+  }
+
+  /* Seta acima da linha do título */
+  .player-aid-arrow {
+    flex: none;
+    transform: translateY(-24px);
+  }
+
+  .player-aid-title {
+    font-size: 80px;
+    white-space: nowrap;
+    -webkit-text-stroke: 14px #2a75bb;
+  }
+
+  .player-aid-step h3 {
+    font-size: 52px;
+    -webkit-text-stroke: 10px #2a75bb;
+  }
+
+  .player-aid-step p {
+    margin: 4px 0 0;
+    font-size: 30px;
+  }
+
+  /* Cartas com mais seções (ex.: palavras-chave) usam títulos e texto menores */
+  .player-aid-dense .player-aid-title {
+    font-size: 58px;
+    -webkit-text-stroke: 11px #2a75bb;
+  }
+
+  .player-aid-dense .player-aid-step h3 {
+    font-size: 44px;
+    -webkit-text-stroke: 8px #2a75bb;
+  }
+
+  .player-aid-dense .player-aid-step p {
+    font-size: 28px;
+  }
+
+  .player-aid-step p :global(em) {
+    font-size: 0.85em;
+  }
+</style>

@@ -2,8 +2,10 @@
 import { existsSync } from "node:fs";
 import Card from "./Card.astro";
 import ScoreCard from "./ScoreCard.astro";
+import PlayerAidCard from "./PlayerAidCard.astro";
 import { getCards } from "../lib/cards";
 import { scoreCards } from "../lib/scoreCard";
+import { playerAidCards } from "../lib/playerAid";
 
 const cards = getCards();
 // PNGs só existem depois de `npm run cards -- --public`
@@ -27,6 +29,13 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
     scoreCards.map((card) => (
       <figure>
         <ScoreCard card={card} />
+      </figure>
+    ))
+  }
+  {
+    playerAidCards.map((card) => (
+      <figure>
+        <PlayerAidCard card={card} />
       </figure>
     ))
   }

@@ -28,6 +28,13 @@
   font-weight: 900;
   font-style: normal;
 }
+/* Fonte do logo Pokémon (Pokémon Solid, dafont), usada nos títulos do player aid */
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("../assets/fonts/pokemon-solid.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 
 /* Medidas em pixels de impressão: a carta tem 744×1039 (63×88mm a 300 DPI) */
 .card {
