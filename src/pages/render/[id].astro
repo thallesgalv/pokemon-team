@@ -3,24 +3,32 @@
 import Card from "../../components/Card.astro";
 import ScoreCard from "../../components/ScoreCard.astro";
 import PlayerAidCard from "../../components/PlayerAidCard.astro";
+import PriceCard from "../../components/PriceCard.astro";
 import { getCards, type CardView } from "../../lib/cards";
 import { scoreCards, type ScoreCardView } from "../../lib/scoreCard";
 import { playerAidCards, type PlayerAidView } from "../../lib/playerAid";
+import { priceCards, type PriceCardView } from "../../lib/priceCard";
 
 export const getStaticPaths = () => [
   ...getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } })),
   ...scoreCards.map((score) => ({ params: { id: score.id }, props: { score } })),
   ...playerAidCards.map((aid) => ({ params: { id: aid.id }, props: { aid } })),
+  ...priceCards.map((price) => ({ params: { id: price.id }, props: { price } })),
 ];
 
-const { card, score, aid } = Astro.props as { card?: CardView; score?: ScoreCardView; aid?: PlayerAidView };
+const { card, score, aid, price } = Astro.props as {
+  card?: CardView;
+  score?: ScoreCardView;
+  aid?: PlayerAidView;
+  price?: PriceCardView;
+};
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>{card?.name ?? score?.name ?? aid?.name}</title>
+    <title>{card?.name ?? score?.name ?? aid?.name ?? price?.name}</title>
     <style is:global>
       body {
         margin: 0;
@@ -32,5 +40,6 @@ const { card, score, aid } = Astro.props as { card?: CardView; score?: ScoreCard
     {card && <Card card={card} bleed />}
     {score && <ScoreCard card={score} bleed />}
     {aid && <PlayerAidCard card={aid} bleed />}
+    {price && <PriceCard card={price} bleed />}
   </body>
 </html>

@@ -3,12 +3,14 @@ import { existsSync } from "node:fs";
 import Card from "./Card.astro";
 import ScoreCard from "./ScoreCard.astro";
 import PlayerAidCard from "./PlayerAidCard.astro";
+import PriceCard from "./PriceCard.astro";
 import { getCards } from "../lib/cards";
 import { scoreCards } from "../lib/scoreCard";
 import { playerAidCards } from "../lib/playerAid";
+import { priceCards } from "../lib/priceCard";
 
 interface Props {
-  kind: "pokemon" | "pontuacao" | "ajuda";
+  kind: "pokemon" | "preco" | "pontuacao" | "ajuda";
 }
 
 const { kind } = Astro.props;
@@ -44,6 +46,14 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
       playerAidCards.map((card) => (
       <figure>
         <PlayerAidCard card={card} />
+      </figure>
+    ))
+  }
+  {
+    kind === "preco" &&
+      priceCards.map((card) => (
+      <figure>
+        <PriceCard card={card} />
       </figure>
     ))
   }

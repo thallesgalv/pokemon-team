@@ -1,0 +1,56 @@
+---
+import { cardSizeVars } from "../lib/cards";
+import type { PriceCardView } from "../lib/priceCard";
+import "../styles/card.css";
+
+interface Props {
+  card: PriceCardView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+---
+
+<article class="card price-card" style={cardSizeVars(bleed)} data-card-id={card.id}>
+  <!-- Estandarte com raios e ponta para baixo, apontando para o Pokémon da Área de Captura -->
+  <div class="price-banner">
+    <div class:list={["card-points", "price-coin", { "price-coin-long": card.price > 9 }]}>{card.price}</div>
+  </div>
+</article>
+
+<style>
+  .price-card {
+    display: flex;
+  }
+
+  .price-banner {
+    flex: 1;
+    margin: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 90px;
+    background:
+      radial-gradient(circle at 50% 44%, rgb(255 255 255 / 0.18), transparent 60%),
+      repeating-conic-gradient(from 0deg at 50% 44%, #3d9a6b 0deg 7deg, #34895e 7deg 14deg);
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
+    border-radius: 32px 32px 0 0;
+  }
+
+  /* Mesma moeda dos pontos das cartas Pokémon, em tamanho grande */
+  .price-coin {
+    width: 380px;
+    height: 380px;
+    border-width: 24px;
+    font-size: 260px;
+    box-shadow:
+      inset 0 0 0 12px #d8d999,
+      inset 0 0 0 18px #344358,
+      0 12px 0 rgb(0 0 0 / 0.18);
+  }
+
+  .price-coin-long {
+    font-size: 190px;
+    letter-spacing: -8px;
+  }
+</style>
