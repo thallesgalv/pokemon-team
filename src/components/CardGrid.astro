@@ -7,6 +7,11 @@ import { getCards } from "../lib/cards";
 import { scoreCards } from "../lib/scoreCard";
 import { playerAidCards } from "../lib/playerAid";
 
+interface Props {
+  kind: "pokemon" | "pontuacao" | "ajuda";
+}
+
+const { kind } = Astro.props;
 const cards = getCards();
 // PNGs só existem depois de `npm run cards -- --public`
 const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
@@ -14,7 +19,8 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
 
 <div class="card-grid not-content">
   {
-    cards.map((card) => (
+    kind === "pokemon" &&
+      cards.map((card) => (
       <figure>
         <Card card={card} />
         {hasPng(card.fileName) && (
@@ -26,14 +32,16 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
     ))
   }
   {
-    scoreCards.map((card) => (
+    kind === "pontuacao" &&
+      scoreCards.map((card) => (
       <figure>
         <ScoreCard card={card} />
       </figure>
     ))
   }
   {
-    playerAidCards.map((card) => (
+    kind === "ajuda" &&
+      playerAidCards.map((card) => (
       <figure>
         <PlayerAidCard card={card} />
       </figure>

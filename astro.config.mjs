@@ -6,13 +6,14 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   site: "https://thallesgalv.github.io",
   base: "/pokemon-team",
+  redirects: { "/": "/pokemon-team/cartas/pokemon/" },
   integrations: [
     starlight({
       title: "Pokémon Team",
       defaultLocale: "root",
       locales: { root: { label: "Português", lang: "pt-BR" } },
       sidebar: [
-        { label: "Cartas", link: "/" },
+        { label: "Cartas", items: [{ autogenerate: { directory: "cartas" } }] },
         { label: "Regras", items: [{ autogenerate: { directory: "regras" } }] },
       ],
     }),
