@@ -11,7 +11,7 @@ Os jogadores competem para ter mais **pontos** no seu time de Pokémon. A cada r
 
 ## Componentes
 
-- 62 cartas Pokémon — 30 da Pool A, 30 da Pool B e 2 promocionais (ver [Combinando as Pools](combinando-as-pools/))
+- 110 cartas Pokémon — 53 da Pool A, 53 da Pool B e 4 promocionais (ver [Combinando as Pools](combinando-as-pools/))
 - 24 cartas iniciais — 6 por jogador, para até 4 jogadores (metade delas usada se jogar com a Pool A, a outra metade com a Pool B)
 - 4 cartas de Pontos
 - 4 cartas de referência
