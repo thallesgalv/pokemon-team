@@ -16,10 +16,11 @@ const tiers: Tier[] = [
   { max: 40, color: "#1a1a1a", badge: "liga" },
 ];
 
+// Insígnias da Liga Índigo (Bulbapedia) em PNG; a Pokébola da faixa 30+ é SVG
 const badgeIcons = new Map<string, string>(
   Object.entries(
-    import.meta.glob<ImageMetadata>("../../assets/badges/*.svg", { eager: true, import: "default" }),
-  ).map(([path, image]) => [path.split("/").pop()!.replace(".svg", ""), image.src]),
+    import.meta.glob<ImageMetadata>("../../assets/badges/*.{png,svg}", { eager: true, import: "default" }),
+  ).map(([path, image]) => [path.split("/").pop()!.replace(/\.(png|svg)$/, ""), image.src]),
 );
 
 export type ScoreCell = { value: number; color: string; badge: string };
