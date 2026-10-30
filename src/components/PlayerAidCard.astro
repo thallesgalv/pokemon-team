@@ -9,45 +9,34 @@ interface Props {
 }
 
 const { card, bleed = false } = Astro.props;
-
-// Pokémon Solid (dafont) é opcional: só declara a fonte se o arquivo existir no repo,
-// senão os títulos usam o fallback Arial Black sem gerar 404
-const pokemonSolid = Object.values(
-  import.meta.glob<string>("../assets/fonts/pokemon-solid.ttf", { eager: true, query: "?url", import: "default" }),
-)[0];
 ---
 
-{
-  pokemonSolid && (
-    <style
-      is:inline
-      set:html={`@font-face { font-family: "Pokemon Solid"; src: url("${pokemonSolid}") format("truetype"); }`}
-    />
-  )
-}
-
-<article class="card player-aid" style={cardSizeVars(bleed)} data-card-id={card.id}>
-  <div class:list={["player-aid-body", { "player-aid-dense": card.steps.length > 4 }]}>
-    <div class:list={["player-aid-heading", { "player-aid-heading-right": card.arrow === "right" }]}>
-      <svg class="player-aid-arrow" viewBox="0 0 64 80" width="64" height="80" aria-hidden="true">
-        <path
-          d="M32 6 L58 38 H42 V74 H22 V38 H6 Z"
-          fill="#ffcb05"
-          stroke="#2a75bb"
-          stroke-width="8"
-          stroke-linejoin="round"
-        />
-      </svg>
+<article class:list={["card", "player-aid", `player-aid-${card.color}`]} style={cardSizeVars(bleed)} data-card-id={card.id}>
+  <div class="player-aid-frame">
+    <header
+      class:list={[
+        "player-aid-heading",
+        { "player-aid-heading-right": card.arrow === "right", "player-aid-heading-long": card.title.length > 12 },
+      ]}
+    >
+      <div class="card-points player-aid-arrow">
+        <svg viewBox="0 0 64 80" width="44" height="55" aria-hidden="true">
+          <path d="M32 6 L58 38 H42 V74 H22 V38 H6 Z" fill="#344358" />
+        </svg>
+      </div>
       <h2 class="player-aid-title">{card.title}</h2>
+    </header>
+
+    <div class:list={["player-aid-body", { "player-aid-dense": card.steps.length > 4 }]}>
+      {
+        card.steps.map((step) => (
+          <section class="player-aid-step">
+            <h3>{step.title}</h3>
+            <p set:html={step.text} />
+          </section>
+        ))
+      }
     </div>
-    {
-      card.steps.map((step) => (
-        <section class="player-aid-step">
-          <h3>{step.title}</h3>
-          <p set:html={step.text} />
-        </section>
-      ))
-    }
   </div>
 </article>
 
@@ -56,83 +45,122 @@ const pokemonSolid = Object.values(
     display: flex;
   }
 
-  .player-aid-body {
+  /* Cores dos raios, as mesmas das cartas de preço */
+  .player-aid-verde {
+    --ray-light: #3d9a6b;
+    --ray-dark: #34895e;
+  }
+
+  .player-aid-azul {
+    --ray-light: #3d7fc4;
+    --ray-dark: #3470b0;
+  }
+
+  /* Moldura colorida com raios, painel creme por dentro, como a carta de referência do Flip Toons */
+  .player-aid-frame {
     box-sizing: border-box;
     flex: 1;
     min-width: 0;
     margin: 40px;
-    padding: 16px 28px 24px;
+    padding: 0 22px 22px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    /* Mesma borda da carta de placar */
-    border: 6px solid #1a1a1a;
-    border-radius: 40px;
-    text-align: center;
-  }
-
-  /* Amarelo com contorno azul, como o logo */
-  .player-aid-title,
-  .player-aid-step h3 {
-    margin: 0;
-    font-family: "Pokemon Solid", "Arial Black", sans-serif;
-    font-weight: 400;
-    color: #ffcb05;
-    paint-order: stroke fill;
-    letter-spacing: 2px;
-    line-height: 1.1;
+    border-radius: 32px;
+    background: repeating-conic-gradient(from 0deg at 50% 8%, var(--ray-light) 0deg 7deg, var(--ray-dark) 7deg 14deg);
   }
 
   .player-aid-heading {
+    flex: none;
+    height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
   }
 
-  /* Seta à direita: mesma marcação, ordem invertida */
   .player-aid-heading-right {
     flex-direction: row-reverse;
   }
 
-  /* Seta acima da linha do título */
   .player-aid-arrow {
     flex: none;
-    transform: translateY(-24px);
+    width: 92px;
+    height: 92px;
+    border-width: 7px;
+    box-shadow:
+      inset 0 0 0 4px #d8d999,
+      inset 0 0 0 7px #344358,
+      0 6px 0 rgb(0 0 0 / 0.18);
   }
 
+  /* Mesmo estilo do nome nas cartas Pokémon: branco com contorno */
   .player-aid-title {
-    font-size: 80px;
+    margin: 0;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
     white-space: nowrap;
-    -webkit-text-stroke: 14px #2a75bb;
+    color: #fff;
+    -webkit-text-stroke: 12px #344358;
+    paint-order: stroke fill;
   }
 
-  .player-aid-step h3 {
+  /* Títulos longos (ex.: Palavras-chave) diminuem para a moeda não encostar na moldura */
+  .player-aid-heading-long .player-aid-title {
     font-size: 52px;
-    -webkit-text-stroke: 10px #2a75bb;
+    -webkit-text-stroke: 10px #344358;
+  }
+
+  .player-aid-body {
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    background: #f7ece6;
+    color: #344358;
+  }
+
+  /* Título da seção em faixa azul-marinho, como a passiva das cartas Pokémon */
+  .player-aid-step h3 {
+    display: inline-block;
+    margin: 0;
+    padding: 6px 20px;
+    border-radius: 10px;
+    background: #344358;
+    color: #fff;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 1.1;
   }
 
   .player-aid-step p {
-    margin: 4px 0 0;
-    font-size: 30px;
+    margin: 10px 0 0;
+    font-size: 29px;
+    line-height: 1.25;
   }
 
-  /* Cartas com mais seções (ex.: palavras-chave) usam títulos e texto menores */
-  .player-aid-dense .player-aid-title {
-    font-size: 58px;
-    -webkit-text-stroke: 11px #2a75bb;
-  }
-
-  .player-aid-dense .player-aid-step h3 {
-    font-size: 44px;
-    -webkit-text-stroke: 8px #2a75bb;
-  }
-
-  .player-aid-dense .player-aid-step p {
-    font-size: 28px;
+  .player-aid-step p :global(strong) {
+    font-weight: 900;
   }
 
   .player-aid-step p :global(em) {
     font-size: 0.85em;
+  }
+
+  /* Palavras-chave: título e texto mais compactos para caberem as seis seções */
+  .player-aid-dense .player-aid-step h3 {
+    font-size: 30px;
+    padding: 4px 16px;
+  }
+
+  .player-aid-dense .player-aid-step p {
+    margin-top: 6px;
+    font-size: 26px;
   }
 </style>

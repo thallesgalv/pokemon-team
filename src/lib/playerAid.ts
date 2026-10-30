@@ -56,17 +56,20 @@ export type PlayerAidView = {
   title: string;
   // Lado da seta em relação ao título
   arrow: "left" | "right";
+  // Cor da moldura, a mesma das cartas de preço
+  color: "verde" | "azul";
   steps: PlayerAidStep[];
 };
 
 export const playerAidCards: PlayerAidView[] = [
-  { id: "como-jogar", name: "COMO_JOGAR", cardCount: 8, title: "Como jogar", arrow: "left", steps: comoJogarSteps },
+  { id: "como-jogar", name: "COMO_JOGAR", cardCount: 8, title: "Como jogar", arrow: "left", color: "verde", steps: comoJogarSteps },
   {
     id: "palavras-chave",
     name: "PALAVRAS_CHAVE",
     cardCount: 8,
     title: "Palavras-chave",
     arrow: "right",
+    color: "azul",
     steps: palavrasChaveSteps,
   },
 ];
