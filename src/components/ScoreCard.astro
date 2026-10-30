@@ -10,17 +10,21 @@ interface Props {
 
 const { card, bleed = false } = Astro.props;
 const rows = scoreRows(card.side);
+// 30 aciona a Revelação Final e ganha destaque, como no placar do Flip Toons
+const isTrigger = (value: number) => value === 30;
 ---
 
 <article class="card score-card" style={cardSizeVars(bleed)} data-card-id={card.id}>
   <div class="score-table">
     {
-      rows.map((row, i) =>
+      rows.map((row) =>
         row.map((cell) => (
-          // Linhas intercaladas: cor da faixa e branco
-          <div class:list={["score-cell", { "score-cell-filled": i % 2 === 0 }]} style={`--tier: ${cell.color}`}>
-            <img src={cell.badge} alt="" width="64" height="64" />
-            <span>{cell.value}</span>
+          // Fundo na cor da faixa e caixa clara com a insígnia e a moeda de pontos
+          <div class="score-cell" style={`--tier: ${cell.color}`}>
+            <div class:list={["score-box", { "score-box-trigger": isTrigger(cell.value) }]}>
+              <img src={cell.badge} alt="" width="56" height="56" />
+              <div class:list={["card-points", "score-coin", { "score-coin-long": cell.value > 9 }]}>{cell.value}</div>
+            </div>
           </div>
         )),
       )
@@ -40,26 +44,54 @@ const rows = scoreRows(card.side);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(10, 1fr);
-    border: 6px solid #1a1a1a;
+    grid-auto-flow: row;
+    border: 8px solid #344358;
     border-radius: 40px;
     overflow: hidden;
+    background: #344358;
+    gap: 0 8px;
   }
 
   .score-cell {
     display: flex;
+    padding: 7px 14px;
+    background: var(--tier);
+  }
+
+  .score-box {
+    flex: 1;
+    display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 0 44px;
-    background: #fff;
+    justify-content: center;
+    gap: 28px;
+    border-radius: 14px;
+    background: #f7ece6;
   }
 
-  .score-cell-filled {
-    background: color-mix(in srgb, var(--tier) 35%, #fff);
+  .score-box-trigger {
+    background: #f2b33d;
+    box-shadow: inset 0 0 0 5px #344358;
   }
 
-  .score-cell span {
-    font-family: "Arial Black", sans-serif;
-    font-weight: 900;
-    font-size: 52px;
+  .score-box img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  /* Mesma moeda dos pontos das cartas Pokémon, em escala menor */
+  .score-coin {
+    width: 76px;
+    height: 76px;
+    border-width: 5px;
+    font-size: 48px;
+    box-shadow:
+      inset 0 0 0 3px #d8d999,
+      inset 0 0 0 5px #344358;
+  }
+
+  .score-coin-long {
+    font-size: 36px;
+    letter-spacing: -1px;
   }
 </style>
