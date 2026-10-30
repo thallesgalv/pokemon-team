@@ -9,7 +9,22 @@ interface Props {
 }
 
 const { card, bleed = false } = Astro.props;
+
+// Pokémon Solid (dafont) é opcional: só declara a fonte se o arquivo existir no repo,
+// senão os títulos usam o fallback Arial Black sem gerar 404
+const pokemonSolid = Object.values(
+  import.meta.glob<string>("../assets/fonts/pokemon-solid.ttf", { eager: true, query: "?url", import: "default" }),
+)[0];
 ---
+
+{
+  pokemonSolid && (
+    <style
+      is:inline
+      set:html={`@font-face { font-family: "Pokemon Solid"; src: url("${pokemonSolid}") format("truetype"); }`}
+    />
+  )
+}
 
 <article class="card player-aid" style={cardSizeVars(bleed)} data-card-id={card.id}>
   <div class:list={["player-aid-body", { "player-aid-dense": card.steps.length > 4 }]}>
