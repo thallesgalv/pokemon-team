@@ -8,6 +8,8 @@ import { getCards } from "../lib/cards";
 import { scoreCards } from "../lib/scoreCard";
 import { playerAidCards } from "../lib/playerAid";
 import { priceCards } from "../lib/priceCard";
+import { richText } from "../lib/richText";
+import { cardFaq } from "../lib/faq";
 
 interface Props {
   kind: "pokemon" | "preco" | "pontuacao" | "ajuda";
@@ -17,6 +19,8 @@ const { kind } = Astro.props;
 const cards = getCards();
 // PNGs só existem depois de `npm run cards -- --public`
 const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
+const dex = (id: number) => `#${String(id).padStart(3, "0")}`;
+const poolLabel = (pool: string) => (pool === "PRM" ? "Promocional" : `Pool ${pool}`);
 ---
 
 <div class="card-grid not-content">
@@ -24,7 +28,42 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
     kind === "pokemon" &&
       cards.map((card) => (
       <figure>
-        <Card card={card} />
+        <button type="button" class="card-open" aria-label={`Ver ${card.name} em tamanho grande`}>
+          <Card card={card} />
+        </button>
+        {/* Informações exibidas ao lado da carta no modal */}
+        <template class="card-info">
+          <p class="card-modal-meta">{dex(card.id)} · {poolLabel(card.pool)}</p>
+          <h2 class="card-modal-name">{card.name}</h2>
+          <dl class="card-modal-stats">
+            <div><dt>Rank</dt><dd>{card.baseRank}</dd></div>
+            <div><dt>Pontos</dt><dd>{card.basePoint}</dd></div>
+            {card.extraPoints !== 0 && <div><dt>Pontos extras</dt><dd>+{card.extraPoints}</dd></div>}
+            <div><dt>Cópias</dt><dd>{card.cardCount}</dd></div>
+          </dl>
+          {(card.passive || card.originalPassive) && (
+            <section>
+              <h3>Efeito especial</h3>
+              <p set:html={richText(card.passive || card.originalPassive)} />
+            </section>
+          )}
+          {(card.text || card.originalText) && (
+            <section>
+              <h3>Habilidade</h3>
+              <p set:html={richText(card.text || card.originalText)} />
+            </section>
+          )}
+          {cardFaq[card.id] && (
+            <section class="card-modal-faq">
+              <h3>FAQ da carta original</h3>
+              <ul>
+                {cardFaq[card.id].map((answer) => (
+                  <li>{answer}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </template>
         {hasPng(card.fileName) && (
           <a href={`${import.meta.env.BASE_URL}/cards/${card.fileName}`} download>
             PNG
@@ -59,6 +98,80 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
   }
 </div>
 
+{
+  kind === "pokemon" && (
+    <dialog class="card-modal not-content" aria-label="Carta em tamanho grande">
+      <button type="button" class="card-modal-close" aria-label="Fechar">×</button>
+      <div class="card-modal-body">
+        <div class="card-modal-card">
+          <div class="card-modal-tilt">
+            <div class="card-modal-slot"></div>
+            <div class="card-modal-glare"></div>
+          </div>
+        </div>
+        <div class="card-modal-info"></div>
+      </div>
+    </dialog>
+  )
+}
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>(".card-modal");
+  if (modal) {
+    const cardSlot = modal.querySelector<HTMLElement>(".card-modal-slot")!;
+    const tilt = modal.querySelector<HTMLElement>(".card-modal-tilt")!;
+    const infoSlot = modal.querySelector<HTMLElement>(".card-modal-info")!;
+    // Tamanho de impressão da carta (ver lib/cards.ts)
+    const CARD_W = 744;
+    const CARD_H = 1039;
+
+    // Ocupa a maior parte da tela: lado a lado no desktop, empilhado no celular
+    const fitCard = () => {
+      const card = cardSlot.querySelector<HTMLElement>(".card");
+      if (!card) return;
+      const wide = window.innerWidth >= 800;
+      const maxW = wide ? window.innerWidth * 0.45 : window.innerWidth * 0.82;
+      const maxH = wide ? window.innerHeight * 0.85 : window.innerHeight * 0.62;
+      card.style.zoom = String(Math.min(maxW / CARD_W, maxH / CARD_H));
+    };
+
+    document.querySelectorAll<HTMLButtonElement>(".card-open").forEach((button) => {
+      button.addEventListener("click", () => {
+        const figure = button.closest("figure")!;
+        cardSlot.replaceChildren(button.querySelector(".card")!.cloneNode(true));
+        infoSlot.replaceChildren(figure.querySelector<HTMLTemplateElement>(".card-info")!.content.cloneNode(true));
+        fitCard();
+        modal.showModal();
+      });
+    });
+
+    window.addEventListener("resize", fitCard);
+
+    // Perspectiva só no desktop (mouse) e sem preferência por menos movimento
+    const canTilt = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    const MAX_TILT = 10;
+    tilt.addEventListener("pointermove", (event) => {
+      if (!canTilt.matches) return;
+      const rect = tilt.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      tilt.classList.add("is-tilting");
+      tilt.style.transform = `rotateX(${(0.5 - y) * 2 * MAX_TILT}deg) rotateY(${(x - 0.5) * 2 * MAX_TILT}deg) scale(1.02)`;
+      tilt.style.setProperty("--glare-x", `${x * 100}%`);
+      tilt.style.setProperty("--glare-y", `${y * 100}%`);
+    });
+    tilt.addEventListener("pointerleave", () => {
+      tilt.classList.remove("is-tilting");
+      tilt.style.transform = "";
+    });
+    modal.querySelector(".card-modal-close")!.addEventListener("click", () => modal.close());
+    // Clique fora do conteúdo (no fundo desfocado) fecha
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) modal.close();
+    });
+  }
+</script>
+
 <style>
   .card-grid {
     display: flex;
@@ -82,6 +195,249 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
 
   figure a {
     font-size: 0.8rem;
+  }
+
+  .card-open {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .card-open:focus-visible {
+    outline: 3px solid var(--sl-color-accent);
+    outline-offset: 4px;
+  }
+
+  /* Hover só em dispositivos com mouse: leve aumento com transição suave */
+  @media (hover: hover) {
+    .card-open {
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    /* Por cima das cartas vizinhas enquanto aumentada */
+    .card-open:hover {
+      position: relative;
+      z-index: 1;
+      transform: scale(1.06);
+      filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.3));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-open {
+      transition: none;
+    }
+  }
+
+  .card-modal {
+    width: min(1100px, 94vw);
+    max-width: none;
+    max-height: 94vh;
+    box-sizing: border-box;
+    /* O reset do Starlight zera a margem que centraliza o <dialog> */
+    margin: auto;
+    overflow: auto;
+    padding: 32px;
+    border: 0;
+    border-radius: 20px;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.4);
+  }
+
+  .card-modal[open] {
+    animation: card-modal-in 0.25s ease;
+  }
+
+  /* Fundo da página desfocado atrás do modal */
+  .card-modal::backdrop {
+    background: rgb(0 0 0 / 0.35);
+    backdrop-filter: blur(8px);
+  }
+
+  @keyframes card-modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-modal[open] {
+      animation: none;
+    }
+  }
+
+  .card-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-white);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .card-modal-body {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .card-modal-card {
+    flex: none;
+    perspective: 1200px;
+  }
+
+  .card-modal-tilt {
+    position: relative;
+    border-radius: 24px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+
+  /* Segue o mouse de perto enquanto inclina; volta devagar ao sair */
+  .card-modal-tilt.is-tilting {
+    transition: transform 0.08s linear;
+  }
+
+  /* Reflexo de luz que acompanha o mouse */
+  .card-modal-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgb(255 255 255 / 0.35), transparent 55%);
+    mix-blend-mode: soft-light;
+    transition: opacity 0.3s ease;
+  }
+
+  .is-tilting .card-modal-glare {
+    opacity: 1;
+  }
+
+  .card-modal-card :global(.card) {
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.3);
+  }
+
+  .card-modal-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .card-modal-info :global(.card-modal-meta) {
+    margin: 0;
+    color: var(--sl-color-gray-3);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .card-modal-info :global(.card-modal-name) {
+    margin: -12px 0 0;
+    font-size: 2.4rem;
+    line-height: 1.1;
+    color: var(--sl-color-white);
+  }
+
+  .card-modal-info :global(.card-modal-stats) {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+  }
+
+  .card-modal-info :global(.card-modal-stats div) {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--sl-color-gray-6);
+  }
+
+  .card-modal-info :global(dt) {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+  }
+
+  .card-modal-info :global(dd) {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--sl-color-white);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-modal-info :global(h3) {
+    margin: 0 0 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+  }
+
+  .card-modal-info :global(section p) {
+    margin: 0;
+  }
+
+  .card-modal-info :global(.card-modal-faq) {
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: var(--sl-color-gray-6);
+    font-size: 0.95rem;
+  }
+
+  .card-modal-info :global(.card-modal-faq ul) {
+    margin: 0;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-modal-info :global(.card-if) {
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+    background: #344358;
+    color: #fff;
+  }
+
+  .card-modal-info :global(em) {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.9em;
+    color: var(--sl-color-gray-2);
+  }
+
+  /* Celular: carta em cima, informações embaixo */
+  @media (max-width: 799px) {
+    .card-modal {
+      padding: 56px 20px 24px;
+    }
+
+    .card-modal-body {
+      flex-direction: column;
+      gap: 24px;
+    }
   }
 
   /* No desktop, a página do grid usa toda a largura em vez da coluna de 45rem do Starlight */

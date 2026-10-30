@@ -1,6 +1,7 @@
 ---
 import pokeball from "../../assets/other/pokeball.png";
 import { cardSizeVars, type CardView } from "../lib/cards";
+import { richText } from "../lib/richText";
 import "../styles/card.css";
 
 interface Props {
@@ -24,18 +25,6 @@ const passive = card.passive || card.originalPassive;
 const lutadorSplit = passive?.match(/^(.*?)\s*\*\*Lutador\*\*\.?\s*$/s);
 // Sem texto nem pontos extras, só os pontos base aparecem, centralizados e sem divisor
 const hasText = Boolean(text) || card.extraPoints !== 0;
-// Keywords marcadas nos dados com **termo** viram negrito e esclarecimentos *(...)* viram itálico
-const richText = (s: string) =>
-  s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    // Condição **SE** no início do texto ganha destaque próprio
-    .replace(/^\s*\*\*SE\*\*/, '<strong class="card-if">SE</strong>')
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    // O ponto final depois do esclarecimento fica no fim da frase, não sozinho na linha de baixo
-    .replace(/\s*(<em>.+?<\/em>)\./g, ".$1");
 ---
 
 <article class="card" style={vars} data-card-id={card.id}>
