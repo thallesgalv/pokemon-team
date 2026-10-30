@@ -1,0 +1,68 @@
+---
+import { cardSizeVars } from "../lib/cards";
+import { scoreRows, type ScoreCardView } from "../lib/scoreCard";
+import "../styles/card.css";
+
+interface Props {
+  card: ScoreCardView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+const rows = scoreRows(card.side);
+---
+
+<article class="card score-card" style={cardSizeVars(bleed)} data-card-id={card.id}>
+  <div class="score-table">
+    {
+      rows.map((row, i) =>
+        row.map((cell) => (
+          // Linhas intercaladas: cor da faixa e branco
+          <div class:list={["score-cell", { "score-cell-filled": i % 2 === 0 }]} style={`--tier: ${cell.color}`}>
+            <img src={cell.badge} alt="" width="64" height="64" />
+            <span>{cell.value}</span>
+          </div>
+        )),
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .score-card {
+    display: flex;
+  }
+
+  .score-table {
+    box-sizing: border-box;
+    flex: 1;
+    margin: 40px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(10, 1fr);
+    gap: 12px;
+    border: 6px solid #1a1a1a;
+    border-radius: 40px;
+  }
+
+  .score-cell {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 28px;
+    border: 8px solid var(--tier);
+    border-radius: 18px;
+    background: #fff;
+  }
+
+  .score-cell-filled {
+    background: color-mix(in srgb, var(--tier) 35%, #fff);
+  }
+
+  .score-cell span {
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 52px;
+  }
+</style>

@@ -1,7 +1,9 @@
 ---
 import { existsSync } from "node:fs";
 import Card from "./Card.astro";
+import ScoreCard from "./ScoreCard.astro";
 import { getCards } from "../lib/cards";
+import { scoreCards } from "../lib/scoreCard";
 
 const cards = getCards();
 // PNGs só existem depois de `npm run cards -- --public`
@@ -18,6 +20,13 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
             PNG
           </a>
         )}
+      </figure>
+    ))
+  }
+  {
+    scoreCards.map((card) => (
+      <figure>
+        <ScoreCard card={card} />
       </figure>
     ))
   }

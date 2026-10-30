@@ -1,3 +1,4 @@
+import { cardConfig } from "../../card.config";
 import { cardList } from "../../data/cardList";
 import type { Card } from "../../types/cardType";
 import { cardAccent, cardBackground } from "./backgrounds";
@@ -28,7 +29,17 @@ const slug = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-export const cardFileName = (card: Pick<Card, "id" | "name">) =>
+// Layout desenhado em pixels de impressão (744×1039 para 63×88mm a 300 DPI)
+const printPx = (mm: number) => Math.round((mm / 25.4) * cardConfig.dpi);
+
+export const cardSizeVars = (bleed: boolean) =>
+  [
+    `--card-w: ${printPx(cardConfig.widthMm)}px`,
+    `--card-h: ${printPx(cardConfig.heightMm)}px`,
+    `--card-bleed: ${bleed ? printPx(cardConfig.bleedMm) : 0}px`,
+  ].join("; ");
+
+export const cardFileName =(card: Pick<Card, "id" | "name">) =>
   `${String(card.id).padStart(3, "0")}-${slug(card.name)}.png`;
 
 // Por enquanto só as cartas que já têm arte em assets/pokemon, enquanto o layout é construído

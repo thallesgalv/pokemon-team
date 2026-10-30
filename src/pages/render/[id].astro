@@ -1,18 +1,23 @@
 ---
 // Página crua (sem Starlight) com uma carta no tamanho físico. Usada pelo CLI de render.
 import Card from "../../components/Card.astro";
+import ScoreCard from "../../components/ScoreCard.astro";
 import { getCards, type CardView } from "../../lib/cards";
+import { scoreCards, type ScoreCardView } from "../../lib/scoreCard";
 
-export const getStaticPaths = () => getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } }));
+export const getStaticPaths = () => [
+  ...getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } })),
+  ...scoreCards.map((score) => ({ params: { id: score.id }, props: { score } })),
+];
 
-const { card } = Astro.props as { card: CardView };
+const { card, score } = Astro.props as { card?: CardView; score?: ScoreCardView };
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>{card.name}</title>
+    <title>{card?.name ?? score?.name}</title>
     <style is:global>
       body {
         margin: 0;
@@ -21,6 +26,7 @@ const { card } = Astro.props as { card: CardView };
     </style>
   </head>
   <body>
-    <Card card={card} bleed />
+    {card && <Card card={card} bleed />}
+    {score && <ScoreCard card={score} bleed />}
   </body>
 </html>

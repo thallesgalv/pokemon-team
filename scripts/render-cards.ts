@@ -1,5 +1,5 @@
 // Gera um PNG por carta em output/cards a partir da rota /render/<id>.
-// Uso: npm run cards [-- --id 1,25] [--skip-build] [--public]
+// Uso: npm run cards [-- --id 1,25,placar-frente] [--skip-build] [--public]
 import { mkdirSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { build, preview } from "astro";
@@ -20,7 +20,7 @@ const { values } = parseArgs({
   },
 });
 
-type CardEntry = { id: number; name: string; fileName: string; cardCount: number };
+type CardEntry = { id: number | string; name: string; cardCount: number };
 
 // Nome de arquivo por cópia impressa, ex.: SNORLAX_2_DE_4.png
 const printFileName = (name: string, index: number, count: number) =>
@@ -50,9 +50,10 @@ let failedCopies = 0;
 
 try {
   const cardList: CardEntry[] = await (await fetch(`${BASE_URL}/render/cards.json`)).json();
-  const ids = values.id?.split(",").map(Number);
-  const cards = ids ? cardList.filter((card) => ids.includes(card.id)) : cardList;
-  const missing = ids?.filter((id) => !cards.some((card) => card.id === id)) ?? [];
+  // ids numéricos para Pokémon, textuais para cartas especiais (ex.: placar-frente)
+  const ids = values.id?.split(",");
+  const cards = ids ? cardList.filter((card) => ids.includes(String(card.id))) : cardList;
+  const missing = ids?.filter((id) => !cards.some((card) => String(card.id) === id)) ?? [];
   if (missing.length) throw new Error(`ids não encontrados: ${missing.join(", ")}`);
 
   const page = await browser.newPage({

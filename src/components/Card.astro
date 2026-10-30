@@ -1,7 +1,6 @@
 ---
-import { cardConfig } from "../../card.config";
 import pokeball from "../../assets/other/pokeball.png";
-import type { CardView } from "../lib/cards";
+import { cardSizeVars, type CardView } from "../lib/cards";
 import "../styles/card.css";
 
 interface Props {
@@ -11,14 +10,7 @@ interface Props {
 
 const { card, bleed = false } = Astro.props;
 const { accent } = card;
-// Layout desenhado em pixels de impressão (744×1039 para 63×88mm a 300 DPI)
-const printPx = (mm: number) => Math.round((mm / 25.4) * cardConfig.dpi);
-const vars = [
-  `--card-w: ${printPx(cardConfig.widthMm)}px`,
-  `--card-h: ${printPx(cardConfig.heightMm)}px`,
-  `--card-bleed: ${bleed ? printPx(cardConfig.bleedMm) : 0}px`,
-  `--accent: ${accent}`,
-].join("; ");
+const vars = `${cardSizeVars(bleed)}; --accent: ${accent}`;
 const { size, left, right, top, bottom } = card.imageEdition;
 const artVars = [
   `--art-x: ${left - right}px`,
