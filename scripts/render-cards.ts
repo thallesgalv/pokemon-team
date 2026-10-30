@@ -8,7 +8,7 @@ import sharp from "sharp";
 import { cardConfig } from "../card.config.ts";
 
 const PORT = 4399;
-const BASE_URL = `http://localhost:${PORT}`;
+const BASE_URL = `http://localhost:${PORT}/pokemon-team`;
 const OUT_DIR = "output/cards";
 const PUBLIC_DIR = "public/cards";
 

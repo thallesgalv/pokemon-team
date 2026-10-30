@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Adaptação do manual original do jogo de cartas em que esse projeto se baseia, trocando os bichos genéricos por Pokémon e aplicando a nomenclatura deste wiki. Veja as [atribuições de cada Pokémon](/atribuicoes) se quiser entender por que cada carta recebeu o Pokémon que recebeu.
+Adaptação do manual original do jogo de cartas em que esse projeto se baseia, trocando os bichos genéricos por Pokémon e aplicando a nomenclatura deste wiki. Veja as [atribuições de cada Pokémon](../atribuicoes/) se quiser entender por que cada carta recebeu o Pokémon que recebeu.
 
 ## Objetivo
 
@@ -13,7 +13,7 @@ Os jogadores competem para ter mais **Pontos** no seu time de Pokémon. A cada r
 
 ## Componentes
 
-- 62 cartas Pokémon — 30 da Pool A, 30 da Pool B e 2 promocionais (ver [Combinando as Pools](/regras/combinando-as-pools))
+- 62 cartas Pokémon — 30 da Pool A, 30 da Pool B e 2 promocionais (ver [Combinando as Pools](combinando-as-pools/))
 - 24 cartas iniciais — 6 por jogador, para até 4 jogadores (metade delas usada se jogar com a Pool A, a outra metade com a Pool B)
 - 4 cartas de Pontos
 - 4 cartas de referência

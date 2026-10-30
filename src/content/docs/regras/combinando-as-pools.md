@@ -7,7 +7,7 @@ sidebar:
 
 A Pool A pode ser combinada com a Pool B para mais variedade e para dar suporte a até 8 jogadores.
 
-Dê a cada jogador, aleatoriamente, um baralho inicial de 6 cartas de uma das duas pools (ver [Preparação](/regras/preparacao)). Devolva pra caixa as cartas iniciais, de referência e de Pontos que não forem usadas.
+Dê a cada jogador, aleatoriamente, um baralho inicial de 6 cartas de uma das duas pools (ver [Preparação](../preparacao/)). Devolva pra caixa as cartas iniciais, de referência e de Pontos que não forem usadas.
 
 Coloque as 5 cartas de preço de uma pool no centro da mesa, em ordem crescente. Depois, acrescente mais uma carta de preço 3 do lado esquerdo e mais uma carta de preço 15 do lado direito, vindas da outra pool, deixando a Área de Captura com 7 cartas de preço: 3, 3, 4, 7, 10, 15 e 15. Jogando com 4 jogadores ou menos, vire essas duas cartas extras (3 e 15) pro lado alternativo.
 

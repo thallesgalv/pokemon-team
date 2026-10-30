@@ -31,7 +31,7 @@ Você vence o jogo solo se gerar 30 Pontos ou mais num único Contar Pontos ante
 
 A Pool A também pode ser combinada com a Pool B num jogo solo, pra mais variedade e desafio.
 
-Use um baralho inicial com 1 Clefairy, 1 Squirtle, 1 Eevee e 3 Rattata (em vez de 2), mais 1 Charmander, 1 Jigglypuff, 1 Bulbasaur e 3 Caterpie (em vez de 2). Devolva a carta do Muk promocional pra caixa — ele não é usado no modo solo combinado. Siga as mudanças de preparação de [Combinando as Pools](/regras/combinando-as-pools) pra formar uma Área de Captura com 7 cartas.
+Use um baralho inicial com 1 Clefairy, 1 Squirtle, 1 Eevee e 3 Rattata (em vez de 2), mais 1 Charmander, 1 Jigglypuff, 1 Bulbasaur e 3 Caterpie (em vez de 2). Devolva a carta do Muk promocional pra caixa — ele não é usado no modo solo combinado. Siga as mudanças de preparação de [Combinando as Pools](../combinando-as-pools/) pra formar uma Área de Captura com 7 cartas.
 
 Depois de completar a preparação, descarte cartas do baralho de captura pra um monte de descarte virado pra cima, de acordo com a dificuldade:
 

@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-1. Escolha se vai jogar com a **Pool A** ou a **Pool B** (dá pra combinar as duas — ver [Combinando as Pools](/regras/combinando-as-pools)).
+1. Escolha se vai jogar com a **Pool A** ou a **Pool B** (dá pra combinar as duas — ver [Combinando as Pools](../combinando-as-pools/)).
 2. Dê a cada jogador o baralho inicial de 6 cartas (rank 0, cinzas) da pool escolhida:
    - **Pool A:** 2 Caterpie, 1 Jigglypuff, 1 Bulbasaur, 1 Charmander e 1 Pikachu.
    - **Pool B:** 2 Rattata, 1 Eevee, 1 Clefairy, 1 Squirtle e 1 Meowth.

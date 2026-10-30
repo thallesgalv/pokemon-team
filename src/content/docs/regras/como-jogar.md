@@ -21,7 +21,7 @@ Algumas habilidades podem mudar o número total de posições do time. Salvo ind
 
 Todos os jogadores revisam seu time ao mesmo tempo pra determinar quantos Pontos geraram, somando os Pontos de cada Pokémon (sobrepondo a carta de referência na carta de Pontos). Esse valor não muda até ser gasto na Fase de Captura.
 
-Se algum jogador gerou 30 Pontos ou mais, quem gerou mais Pontos pega a carta de escolha do crítico, que vale +3 Pontos na Revelação Final. Se dois ou mais jogadores empatarem na maior pontuação com 30 ou mais, devolva a carta de escolha do crítico pra caixa — isso também aciona o fim do jogo (ver [Revelação Final](/regras/revelacao-final)).
+Se algum jogador gerou 30 Pontos ou mais, quem gerou mais Pontos pega a carta de escolha do crítico, que vale +3 Pontos na Revelação Final. Se dois ou mais jogadores empatarem na maior pontuação com 30 ou mais, devolva a carta de escolha do crítico pra caixa — isso também aciona o fim do jogo (ver [Revelação Final](../revelacao-final/)).
 
 **Exemplo:** o time de Jordy, usando o baralho inicial da Pool A, tem Pikachu, Bulbasaur, Jigglypuff, Caterpie, Caterpie e Charmander. Pikachu e Bulbasaur não têm efeito nesse time (0 Pontos cada); Jigglypuff gera 1; os dois Caterpie geram 0 cada; Charmander gera **POR** Pokémon adjacente diferente — como ele está do lado de um Caterpie, soma 1. No total, Jordy gera 2 Pontos nessa rodada.
 

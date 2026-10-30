@@ -14,7 +14,7 @@ const hasPng = (fileName: string) => existsSync(`public/cards/${fileName}`);
       <figure>
         <Card card={card} />
         {hasPng(card.fileName) && (
-          <a href={`/cards/${card.fileName}`} download>
+          <a href={`${import.meta.env.BASE_URL}/cards/${card.fileName}`} download>
             PNG
           </a>
         )}

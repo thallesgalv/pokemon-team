@@ -25,4 +25,4 @@ sidebar:
 
 **Cartas empilhadas:** cartas empilhadas compartilham uma posição no time. O nome, os Pontos, o rank, os efeitos especiais e as habilidades de todos os Pokémon virados pra cima numa pilha estão ativos.
 
-Esclarecimentos específicos de cada Pokémon (como o de Poliwrath não ser Lutador) já estão escritos entre parênteses no texto da própria carta — veja em [Cartas](/).
+Esclarecimentos específicos de cada Pokémon (como o de Poliwrath não ser Lutador) já estão escritos entre parênteses no texto da própria carta — veja em [Cartas](../../).
