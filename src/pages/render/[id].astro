@@ -4,23 +4,31 @@ import Card from "../../components/Card.astro";
 import ScoreCard from "../../components/ScoreCard.astro";
 import PlayerAidCard from "../../components/PlayerAidCard.astro";
 import PriceCard from "../../components/PriceCard.astro";
+import UniqueCard from "../../components/UniqueCard.astro";
+import ResetCard from "../../components/ResetCard.astro";
 import { getCards, type CardView } from "../../lib/cards";
 import { scoreCards, type ScoreCardView } from "../../lib/scoreCard";
 import { playerAidCards, type PlayerAidView } from "../../lib/playerAid";
 import { priceCards, type PriceCardView } from "../../lib/priceCard";
+import { uniqueCards, type UniqueCardView } from "../../lib/uniqueCard";
+import { resetCards, type ResetCardView } from "../../lib/resetCard";
 
 export const getStaticPaths = () => [
   ...getCards().map((card) => ({ params: { id: String(card.id) }, props: { card } })),
   ...scoreCards.map((score) => ({ params: { id: score.id }, props: { score } })),
   ...playerAidCards.map((aid) => ({ params: { id: aid.id }, props: { aid } })),
   ...priceCards.map((price) => ({ params: { id: price.id }, props: { price } })),
+  ...uniqueCards.map((unique) => ({ params: { id: unique.id }, props: { unique } })),
+  ...resetCards.map((reset) => ({ params: { id: reset.id }, props: { reset } })),
 ];
 
-const { card, score, aid, price } = Astro.props as {
+const { card, score, aid, price, unique, reset } = Astro.props as {
   card?: CardView;
   score?: ScoreCardView;
   aid?: PlayerAidView;
   price?: PriceCardView;
+  unique?: UniqueCardView;
+  reset?: ResetCardView;
 };
 ---
 
@@ -28,7 +36,7 @@ const { card, score, aid, price } = Astro.props as {
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>{card?.name ?? score?.name ?? aid?.name ?? price?.name}</title>
+    <title>{card?.name ?? score?.name ?? aid?.name ?? price?.name ?? unique?.name ?? reset?.name}</title>
     <style is:global>
       body {
         margin: 0;
@@ -41,5 +49,7 @@ const { card, score, aid, price } = Astro.props as {
     {score && <ScoreCard card={score} bleed />}
     {aid && <PlayerAidCard card={aid} bleed />}
     {price && <PriceCard card={price} bleed />}
+    {unique && <UniqueCard card={unique} bleed />}
+    {reset && <ResetCard card={reset} bleed />}
   </body>
 </html>

@@ -1,0 +1,23 @@
+---
+// Seta circular (↻) usada nas Cartas de Resetar
+interface Props {
+  size: number;
+  color?: string;
+  stroke?: string;
+}
+
+const { size, color = "#344358", stroke } = Astro.props;
+---
+
+<svg viewBox="0 0 100 100" width={size} height={size} aria-hidden="true">
+  {
+    stroke && (
+      <g fill="none" stroke={stroke} stroke-width="30" stroke-linejoin="round">
+        <path d="M80 50 A30 30 0 1 1 64 23.5" stroke-linecap="round" />
+        <path d="M54 8 L82 22 L60 42 Z" />
+      </g>
+    )
+  }
+  <path d="M80 50 A30 30 0 1 1 64 23.5" fill="none" stroke={color} stroke-width="14" stroke-linecap="round" />
+  <path d="M54 8 L82 22 L60 42 Z" fill={color} stroke={color} stroke-width="4" stroke-linejoin="round" />
+</svg>

@@ -20,7 +20,7 @@ const { values } = parseArgs({
   },
 });
 
-type CardEntry = { id: number | string; name: string; cardCount: number };
+type CardEntry = { id: number | string; name: string; cardCount: number; landscape?: boolean };
 
 // Nome de arquivo por cópia impressa, ex.: SNORLAX_2_DE_4.png
 const printFileName = (name: string, index: number, count: number) =>
@@ -42,7 +42,8 @@ const size = {
   width: printPx(cardConfig.widthMm + 2 * cardConfig.bleedMm),
   height: printPx(cardConfig.heightMm + 2 * cardConfig.bleedMm),
 };
-const viewport = { width: size.width + 1, height: size.height + 1 };
+// Viewport cobre a carta em pé e deitada (cartas únicas são horizontais)
+const viewport = { width: size.height + 1, height: size.height + 1 };
 const browser = await chromium.launch();
 const failures: string[] = [];
 let total = 0;
@@ -68,7 +69,11 @@ try {
       await page.waitForFunction(() => [...document.images].every((img) => img.complete));
       const screenshot = await page.screenshot();
       const buffer = await sharp(screenshot)
-        .extract({ left: 0, top: 0, ...size })
+        .extract({
+          left: 0,
+          top: 0,
+          ...(card.landscape ? { width: size.height, height: size.width } : size),
+        })
         .withMetadata({ density: cardConfig.dpi })
         .toBuffer();
       for (let copy = 1; copy <= card.cardCount; copy++) {

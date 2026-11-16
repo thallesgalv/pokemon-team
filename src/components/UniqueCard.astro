@@ -1,0 +1,352 @@
+---
+import { cardSizeVars } from "../lib/cards";
+import type { UniqueCardView } from "../lib/uniqueCard";
+import ResetIcon from "./ResetIcon.astro";
+import "../styles/card.css";
+
+interface Props {
+  card: UniqueCardView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+// Custos da Área de Captura, como nas cartas de preço
+const prices = [3, 4, 7, 10, 15];
+---
+
+<article
+  class:list={["card", "unique-card", `unique-card-${card.color}`, { "unique-dense": card.dense }]}
+  style={cardSizeVars(bleed, true)}
+  data-card-id={card.id}
+>
+  <div class="unique-frame">
+    <div class="unique-panel">
+      <div class="unique-art">
+        {card.image && <img src={card.image} alt="" style={`object-position: ${card.imagePosition}`} />}
+        {
+          card.illustration === "resetar-time" && (
+            <div class="unique-illustration">
+              <div class="mini-grid">
+                {Array.from({ length: 6 }, () => (
+                  <div class="mini-card" />
+                ))}
+              </div>
+              <div class="mini-icon">
+                <ResetIcon size={210} color="#fff" stroke="#344358" />
+              </div>
+            </div>
+          )
+        }
+        {
+          card.illustration === "resetar-area" && (
+            <div class="unique-illustration unique-illustration-area">
+              <div class="mini-market">
+                {prices.map((price) => (
+                  <div class="mini-slot">
+                    <div class:list={["card-points", "mini-coin", { "mini-coin-long": price > 9 }]}>{price}</div>
+                    <div class="mini-card" />
+                  </div>
+                ))}
+              </div>
+              <ResetIcon size={130} color="#fff" stroke="#344358" />
+              <div class="mini-deck">
+                <div class="mini-card" />
+                <div class="mini-card" />
+                <div class="mini-card" />
+              </div>
+            </div>
+          )
+        }
+      </div>
+      <div class="unique-content">
+        <h2 class="unique-title">{card.title.map((line) => <span>{line}</span>)}</h2>
+        <h3 class="unique-subtitle">{card.subtitle}</h3>
+        <div class="unique-effect">
+          {card.bonus && <div class="card-points unique-coin">{card.bonus}</div>}
+          <p set:html={card.text} />
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .unique-card {
+    display: flex;
+  }
+
+  .unique-card-vermelho {
+    --ray-light: #d4493e;
+    --ray-dark: #bf3d33;
+  }
+
+  /* Mesmas cores das cartas de preço e de ajuda */
+  .unique-card-verde {
+    --ray-light: #3d9a6b;
+    --ray-dark: #34895e;
+  }
+
+  .unique-card-azul {
+    --ray-light: #3d7fc4;
+    --ray-dark: #3470b0;
+  }
+
+  /* Índigo da Liga, com a moeda dourada do 30+ do placar */
+  .unique-card-indigo {
+    --ray-light: #4f45a0;
+    --ray-dark: #443b8d;
+  }
+
+  /* Moldura com raios e painel creme, como as cartas de ajuda */
+  .unique-frame {
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    margin: 40px;
+    padding: 22px;
+    display: flex;
+    border-radius: 32px;
+    background: repeating-conic-gradient(from 0deg at 22% 50%, var(--ray-light) 0deg 7deg, var(--ray-dark) 7deg 14deg);
+  }
+
+  .unique-panel {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #f7ece6;
+    color: #344358;
+  }
+
+  .unique-art {
+    position: relative;
+    flex: none;
+    width: 60%;
+  }
+
+  .unique-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Corte diagonal com filete na cor da moldura */
+  .unique-art {
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+    background: var(--ray-dark);
+  }
+
+  .unique-art img {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, calc(92% - 16px) 100%, 0 100%);
+  }
+
+  .unique-content {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 24px 22px 24px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  /* Mesmo estilo do título das cartas de ajuda */
+  .unique-title {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 1.02;
+    color: #fff;
+    -webkit-text-stroke: 12px #344358;
+    paint-order: stroke fill;
+  }
+
+  /* Faixa azul-marinho, como os títulos de seção das cartas de ajuda */
+  .unique-subtitle {
+    margin: 0;
+    padding: 6px 20px;
+    border-radius: 10px;
+    background: #344358;
+    color: #fff;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 1.1;
+  }
+
+  .unique-effect {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .unique-effect p {
+    margin: 0;
+    font-size: 27px;
+    line-height: 1.25;
+  }
+
+  .unique-effect p :global(em) {
+    font-size: 0.85em;
+  }
+
+  /* Moeda de pontos em destaque dourado, como a faixa 30+ do placar */
+  .unique-coin {
+    flex: none;
+    width: 104px;
+    height: 104px;
+    border-width: 9px;
+    background: #f2b33d;
+    font-size: 46px;
+    letter-spacing: -2px;
+    box-shadow:
+      inset 0 0 0 5px #f2b33d,
+      inset 0 0 0 8px #344358,
+      0 6px 0 rgb(0 0 0 / 0.18);
+  }
+
+  /* Cartas de regra: imagem mais estreita e textos menores */
+  .unique-dense .unique-art {
+    width: 44%;
+  }
+
+  .unique-dense .unique-content {
+    gap: 14px;
+  }
+
+  .unique-dense .unique-title {
+    font-size: 54px;
+    -webkit-text-stroke: 10px #344358;
+  }
+
+  .unique-dense .unique-subtitle {
+    font-size: 26px;
+  }
+
+  .unique-dense .unique-effect p {
+    font-size: 28px;
+    line-height: 1.28;
+  }
+
+  /* Ilustrações em CSS, no lugar da imagem */
+  .unique-illustration {
+    position: absolute;
+    inset: 0;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding-right: 40px;
+    background: radial-gradient(circle at 40% 45%, #4a5a72, #2a3648 75%);
+    clip-path: polygon(0 0, 100% 0, calc(92% - 16px) 100%, 0 100%);
+  }
+
+  .unique-art:has(.unique-illustration) {
+    clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  }
+
+  /* Verso de carta em miniatura, no estilo Pokébola */
+  .mini-card {
+    box-sizing: border-box;
+    width: 70px;
+    height: 98px;
+    border: 5px solid #344358;
+    border-radius: 10px;
+    background:
+      radial-gradient(circle, #fff 0 9px, #344358 9px 14px, transparent 14px),
+      linear-gradient(#d4493e 0 calc(50% - 3px), #344358 calc(50% - 3px) calc(50% + 3px), #f7ece6 calc(50% + 3px));
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 14px;
+    opacity: 0.85;
+  }
+
+  .mini-grid .mini-card {
+    width: 84px;
+    height: 118px;
+  }
+
+  .mini-icon {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 20px);
+    translate: -50% -50%;
+    filter: drop-shadow(0 6px 0 rgb(0 0 0 / 0.25));
+  }
+
+  .unique-illustration-area {
+    gap: 22px;
+  }
+
+  .mini-market {
+    display: flex;
+    gap: 8px;
+  }
+
+  .mini-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mini-slot .mini-card {
+    width: 58px;
+    height: 82px;
+  }
+
+  .mini-coin {
+    width: 52px;
+    height: 52px;
+    border-width: 4px;
+    font-size: 26px;
+    box-shadow:
+      inset 0 0 0 2px #d8d999,
+      inset 0 0 0 4px #344358;
+  }
+
+  .mini-coin-long {
+    font-size: 21px;
+    letter-spacing: -1px;
+  }
+
+  /* Baralho de captura: três versos sobrepostos */
+  .mini-deck {
+    position: relative;
+    width: 110px;
+    height: 150px;
+  }
+
+  .mini-deck .mini-card {
+    position: absolute;
+    width: 96px;
+    height: 134px;
+  }
+
+  .mini-deck .mini-card:nth-child(1) {
+    left: 0;
+    top: 0;
+  }
+
+  .mini-deck .mini-card:nth-child(2) {
+    left: 7px;
+    top: 8px;
+  }
+
+  .mini-deck .mini-card:nth-child(3) {
+    left: 14px;
+    top: 16px;
+  }
+</style>

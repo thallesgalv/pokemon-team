@@ -32,10 +32,11 @@ const slug = (s: string) =>
 // Layout desenhado em pixels de impressão (744×1039 para 63×88mm a 300 DPI)
 const printPx = (mm: number) => Math.round((mm / 25.4) * cardConfig.dpi);
 
-export const cardSizeVars = (bleed: boolean) =>
+// Cartas horizontais (ex.: cartas únicas) trocam largura e altura
+export const cardSizeVars = (bleed: boolean, landscape = false) =>
   [
-    `--card-w: ${printPx(cardConfig.widthMm)}px`,
-    `--card-h: ${printPx(cardConfig.heightMm)}px`,
+    `--card-w: ${printPx(landscape ? cardConfig.heightMm : cardConfig.widthMm)}px`,
+    `--card-h: ${printPx(landscape ? cardConfig.widthMm : cardConfig.heightMm)}px`,
     `--card-bleed: ${bleed ? printPx(cardConfig.bleedMm) : 0}px`,
   ].join("; ");
 

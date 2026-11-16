@@ -4,15 +4,19 @@ import Card from "./Card.astro";
 import ScoreCard from "./ScoreCard.astro";
 import PlayerAidCard from "./PlayerAidCard.astro";
 import PriceCard from "./PriceCard.astro";
+import UniqueCard from "./UniqueCard.astro";
+import ResetCard from "./ResetCard.astro";
 import { getCards } from "../lib/cards";
 import { scoreCards } from "../lib/scoreCard";
 import { playerAidCards } from "../lib/playerAid";
 import { priceCards } from "../lib/priceCard";
+import { uniqueCards } from "../lib/uniqueCard";
+import { resetCards } from "../lib/resetCard";
 import { richText } from "../lib/richText";
 import { cardFaq } from "../lib/faq";
 
 interface Props {
-  kind: "pokemon" | "preco" | "pontuacao" | "ajuda";
+  kind: "pokemon" | "preco" | "pontuacao" | "ajuda" | "unicas" | "resetar";
 }
 
 const { kind } = Astro.props;
@@ -85,6 +89,22 @@ const poolLabel = (pool: string) => (pool === "PRM" ? "Promocional" : `Pool ${po
       playerAidCards.map((card) => (
       <figure>
         <PlayerAidCard card={card} />
+      </figure>
+    ))
+  }
+  {
+    kind === "unicas" &&
+      uniqueCards.map((card) => (
+      <figure>
+        <UniqueCard card={card} />
+      </figure>
+    ))
+  }
+  {
+    kind === "resetar" &&
+      resetCards.map((card) => (
+      <figure>
+        <ResetCard card={card} />
       </figure>
     ))
   }

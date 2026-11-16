@@ -1,0 +1,139 @@
+---
+import { cardSizeVars } from "../lib/cards";
+import type { ResetCardView } from "../lib/resetCard";
+import ResetIcon from "./ResetIcon.astro";
+import "../styles/card.css";
+
+interface Props {
+  card: ResetCardView;
+  bleed?: boolean;
+}
+
+const { card, bleed = false } = Astro.props;
+---
+
+<article class="card reset-card" style={cardSizeVars(bleed)} data-card-id={card.id}>
+  <div class="reset-frame">
+    <header class="reset-heading">
+      <div class="card-points reset-coin">
+        <ResetIcon size={56} />
+      </div>
+      <h2 class="reset-title">Resetar</h2>
+    </header>
+
+    <div class="reset-body">
+      <!-- Botão vermelho grande, como o Big Button do Flip Toons -->
+      <div class="reset-button">
+        <div class="reset-button-dome">
+          <ResetIcon size={190} color="#fff" stroke="#9e2a22" />
+        </div>
+      </div>
+      <p set:html={card.text} />
+    </div>
+  </div>
+</article>
+
+<style>
+  .reset-card {
+    display: flex;
+  }
+
+  /* Moldura com raios vermelhos e painel creme, como as cartas de ajuda */
+  .reset-frame {
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    margin: 40px;
+    padding: 0 22px 22px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 32px;
+    background: repeating-conic-gradient(from 0deg at 50% 8%, #d4493e 0deg 7deg, #bf3d33 7deg 14deg);
+  }
+
+  .reset-heading {
+    flex: none;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .reset-coin {
+    flex: none;
+    width: 92px;
+    height: 92px;
+    border-width: 7px;
+    box-shadow:
+      inset 0 0 0 4px #d8d999,
+      inset 0 0 0 7px #344358,
+      0 6px 0 rgb(0 0 0 / 0.18);
+  }
+
+  /* Mesmo título das cartas de ajuda */
+  .reset-title {
+    margin: 0;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+    color: #fff;
+    -webkit-text-stroke: 12px #344358;
+    paint-order: stroke fill;
+  }
+
+  .reset-body {
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 20px;
+    background: #f7ece6;
+    color: #344358;
+    text-align: center;
+  }
+
+  /* Base azul-marinho com a cúpula vermelha por cima */
+  .reset-button {
+    box-sizing: border-box;
+    width: 420px;
+    height: 420px;
+    padding: 30px 30px 46px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #4a5a72, #344358 70%);
+    box-shadow:
+      inset 0 -10px 0 rgb(0 0 0 / 0.25),
+      0 12px 0 rgb(0 0 0 / 0.18);
+  }
+
+  .reset-button-dome {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 30%, #ff8a7a 0%, #e8473a 35%, #b8281e 80%);
+    box-shadow:
+      inset 0 -18px 0 rgb(0 0 0 / 0.2),
+      inset 0 8px 0 rgb(255 255 255 / 0.25),
+      0 16px 0 #8c1f17;
+  }
+
+  .reset-body p {
+    margin: 0;
+    font-size: 34px;
+    line-height: 1.3;
+  }
+
+  .reset-body p :global(em) {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.8em;
+  }
+</style>

@@ -18,5 +18,6 @@ Os jogadores competem para ter mais **pontos** no seu time de Pokémon. A cada r
 - 7 cartas de preço (3, 3, 4, 7, 10, 15 e 15)
 - 1 carta de primeiro jogador
 - 1 carta de primeiro a chegar no Planalto Índigo
+- 8 Cartas de Resetar e 2 cartas de regra de Resetar (ver [Carta de Resetar](carta-de-resetar/))
 
 Cada carta Pokémon mostra um **rank** (usado pra ordenar a Área de Captura e decidir o menor/maior rank do time) e os **pontos** que ela gera, além do texto do seu efeito especial ou habilidade.
